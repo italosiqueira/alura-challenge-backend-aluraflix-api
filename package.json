@@ -13,7 +13,7 @@
     "dynamodb"
   ],
   "author": "Italo Siqueira Lima",
-  "license": "ISC",
+  "license": "AGPL-3.0-or-later",
   "dependencies": {
     "aws-sdk": "^2.953.0",
     "moment": "^2.29.1",
