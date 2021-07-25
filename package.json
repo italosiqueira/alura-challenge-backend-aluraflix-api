@@ -1,0 +1,26 @@
+{
+  "name": "alura-challenge-backend-aluraflix-api",
+  "version": "1.0.0",
+  "description": "Aluraflix Video API",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "serverless",
+    "aws",
+    "dynamodb"
+  ],
+  "author": "Italo Siqueira Lima",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.953.0",
+    "moment": "^2.29.1",
+    "nanoid": "^3.1.23"
+  },
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-offline": "^7.0.0"
+  }
+}

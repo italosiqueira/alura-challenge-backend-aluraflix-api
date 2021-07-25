@@ -1,0 +1,135 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: alura-challenge-backend-aluraflix-api
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: '2'
+
+# serverless-offline: para execução local da aplicação (note que serviços externos devem ser configurados independentementes)
+# serverless-dynamodb-local: para executar uma instância local do DynamoDB (evitar cobranças)
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+
+custom:
+  dynamodb:
+  # If you only want to use DynamoDB Local in some stages, declare them here
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      heapInitial: 200m
+      heapMax: 1g
+      migrate: true
+      seed: true
+      convertEmptyValues: true
+    seed:
+      domain:
+        sources:
+          - table: ${self:provider.environment.VIDEOS_TABLE}
+            sources: [./offline/migrations/videos-seed.json]
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+
+# you can overwrite defaults here
+  stage: dev
+  region: us-east-1
+
+# Role Statements para as Funções Lambda do Usuário IAM (para uso na infra da AWS)
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - dynamodb:Query
+#        - dynamodb:Scan
+#        - dynamodb:PutItem
+#        - dynamodb:DeleteItem
+#        - dynamodb:UpdateItem
+#        - dynamodb:GetItem
+#      Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.VIDEOS_TABLE}'
+#
+# Variáveis Globais de Ambiente (podem ser acessadas inclusive de dentro do programa)
+# opt:<var> refere-se ao valor de linha de comando --var
+# self:<var> refere-se às variáveis especificadas no arquivo serverless.yml
+  environment:
+    VIDEOS_TABLE: 'VIDEOS'
+
+# you can add packaging information here
+package:
+  patterns:
+    - '!.dynamodb/**'
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get
+  listarVideos:
+    handler: handler.listarVideos
+    events:
+      - httpApi:
+          path: /videos
+          method: get
+  obterVideo:
+    handler: handler.obterVideo
+    events:
+      - httpApi:
+          path: /videos/{videoId}
+          method: get
+  criarVideo:
+    handler: handler.criarVideo
+    events:
+      - httpApi:
+          path: /videos
+          method: post
+  atualizarVideo:
+    handler: handler.atualizarVideo
+    events:
+      - httpApi:
+          path: /videos/{videoId}
+          method: put
+  removerVideo:
+    handler: handler.removerVideo
+    events:
+      - httpApi:
+          path: /videos/{videoId}
+          method: delete
+
+# Provisionamento de uma tabela no SGBD AWS DynamoDB. Note a reserva de 
+# recursos, lá embaixo. É mínima por tratar-se de um pequeno projeto de 
+# aprendizagem.
+resources:
+  Resources:
+    PacientesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.VIDEOS_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
