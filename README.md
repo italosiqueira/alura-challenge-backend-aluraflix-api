@@ -1,6 +1,6 @@
 # AluraFlix Backend API Rest
 
-Este é o projeto da API Rest do Challange Back End da Alura.
+Este é o projeto da API Rest do Challange Back End da Alura. #alurachallengeback
 
 # Sobre o projeto
 
