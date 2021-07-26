@@ -263,7 +263,7 @@ module.exports.atualizarVideo = async (event) => {
     if (error == 'ConditionalCheckFailedException') {
       error = 'ItemNotFoundException';
       message = `Recurso com o ID ${videoId} não existe e não pode ser atualizado`;
-      statusCode = 400;
+      statusCode = 404;
     }
 
     return {
@@ -319,7 +319,7 @@ module.exports.removerVideo = async (event) => {
     if (error == 'ConditionalCheckFailedException') {
       error = 'ItemNotFoundException';
       message = `Recurso com o ID ${videoId} não existe e não pode ser removido`;
-      statusCode = 400;
+      statusCode = 404;
     }
 
     return {
