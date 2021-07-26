@@ -27,6 +27,8 @@ plugins:
   - serverless-dynamodb-local
 
 custom:
+  serverless-offline:
+    httpPort: 3001
   dynamodb:
   # If you only want to use DynamoDB Local in some stages, declare them here
     stages:
