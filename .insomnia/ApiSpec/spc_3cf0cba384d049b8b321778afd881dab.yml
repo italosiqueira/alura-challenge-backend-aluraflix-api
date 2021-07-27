@@ -1,0 +1,227 @@
+_id: spc_3cf0cba384d049b8b321778afd881dab
+type: ApiSpec
+parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
+modified: 1627385946216
+created: 1627190140342
+fileName: AluraFlix API
+contents: >-
+  openapi: 3.0.0
+
+  info:
+    description: Este é o projeto da API Rest do Challange Back-End da Alura.
+    version: 1.0.0
+    title: AluraFlix
+    contact:
+      email: italosiqueira@gmail.com
+    license:
+      name: GPL 3.0
+      url: https://opensource.org/licenses/GPL-3.0
+  tag:
+    - name: video
+      description: Todas as informações sobre vídeos registrados na plataforma.
+  servers:
+    - url: http://localhost:{port}
+      description: Local test server
+      variables:
+        port:
+          default: 3001
+  paths:
+    /videos:
+      get:
+        tags:
+          - video
+        summary: Busca os vídeos registrados na plataforma.
+        description: ""
+        operationId: listarVideos
+        requestBody:
+        responses:
+          "200":
+            description: Sucesso
+      post:
+        tags:
+          - video
+        summary: Registra um novo vídeo na plataforma.
+        description: ""
+        operationId: criarVideo
+        requestBody:
+          required: true;
+          content:
+            application/json:
+              schema:
+                type: object
+                minimum: 1
+                maximum: 1
+                properties:
+                  titulo:
+                    type: string
+                  descricao:
+                    type: string
+                  url:
+                    type: string
+        responses:
+          "201":
+            description: Vídeo registrado com sucesso.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    id:
+                      type: string
+                    titulo:
+                      type: string
+                    descricao:
+                      type: string
+                    url:
+                      type: string
+          "400":
+            description: Pelo menos um atributo obrigatório está ausente.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    error:
+                      type: string
+                      description: Categoria interna do erro.
+                    message:
+                      type: string
+    /videos/{id}:
+      get:
+        tags:
+          - video
+        summary: Recupera um vídeo registrado na plataforma.
+        description:
+        parameters:
+        - name: id
+          in: path
+          required: true
+          description: Identificador único do vídeo a ser atualizado.
+        responses:
+          "200":
+            description: Vídeo atualizado com sucesso.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    id:
+                      type: string
+                    titulo:
+                      type: string
+                    descricao:
+                      type: string
+                    url:
+                      type: string
+      put:
+        tags:
+          - video
+        summary: Atualiza um vídeo registrado na plataforma.
+        description:
+        parameters:
+        - name: id
+          in: path
+          required: true
+          description: Identificador único do vídeo a ser atualizado.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                miminum: 1
+                maximum: 1
+                properties:
+                  titulo:
+                    type: string
+                  descricao:
+                    type: string
+                  url:
+                    type: string
+        responses:
+          "200":
+            description: Vídeo atualizado com sucesso.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    id:
+                      type: string
+                    titulo:
+                      type: string
+                    descricao:
+                      type: string
+                    url:
+                      type: string
+          "400":
+            description: Pelo menos um atributo obrigatório está ausente.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    error:
+                      type: string
+                      description: Categoria interna do erro. Possivelmente *MissingParameterException*.
+                    message:
+                      type: string
+          "404":
+            description: ID do vídeo não encontrado.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    error:
+                      type: string
+                      description: Categoria interna do erro. Possivelmente *ItemNotFoundException*.
+                    message:
+                      type: string
+      delete:
+        tags:
+          - video
+        summary: Remove um vídeo registrado na plataforma.
+        description:
+        parameters:
+        - name: id
+          in: path
+          required: true
+          description: Identificador único do vídeo a ser atualizado.
+        responses:
+          "200":
+            description: Vídeo removido com sucesso.
+            content:
+              text/plain:
+                schema:
+                  type: string
+                  minimum: 1
+                  maximum: 1
+                  description: Simples mensagem informativa
+          "404":
+            description: ID do vídeo não encontrado.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    error:
+                      type: string
+                      description: Categoria interna do erro. Possivelmente *ItemNotFoundException*.
+                    message:
+                      type: string
+contentType: yaml

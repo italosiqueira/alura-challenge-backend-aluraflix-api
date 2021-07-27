@@ -1,0 +1,13 @@
+_id: ut_a8e08899b6194519bfd08d3a1ce81d18
+type: UnitTest
+parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
+modified: 1627305997536
+created: 1627192355475
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd71736bd307d1
+name: Registra Vídeo completo
+code: |-
+  const response = await insomnia.send();
+  expect(response.status).to.equal(201);
+
+  const item = JSON.parse(response.data);
+  expect(item).to.be.an('object').that.has.property('id');

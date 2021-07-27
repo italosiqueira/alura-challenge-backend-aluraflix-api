@@ -1,0 +1,14 @@
+_id: ut_bb9a0fcc6a2947248cfce48acf72ca65
+type: UnitTest
+parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
+modified: 1627305988906
+created: 1627191543731
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd717333257891
+name: Consulta todos os vídeos
+code: |-
+  const response = await insomnia.send();
+  const body = JSON.parse(response.data);
+
+  expect(response.status).to.equal(200);
+  expect(body).to.be.an('array');
+  expect(body).to.have.lengthOf(3);

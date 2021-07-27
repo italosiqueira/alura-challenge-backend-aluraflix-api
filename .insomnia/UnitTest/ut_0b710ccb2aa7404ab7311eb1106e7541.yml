@@ -1,0 +1,16 @@
+_id: ut_0b710ccb2aa7404ab7311eb1106e7541
+type: UnitTest
+parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
+modified: 1627306028841
+created: 1627193045075
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd71735bc1a22b
+name: Atualiza vídeo completo com identificador válido
+code: >-
+  const response = await insomnia.send();
+
+  expect(response.status).to.equal(200);
+
+
+  const item = JSON.parse(response.data);
+
+  expect(item).to.have.property('titulo', 'Diferença entre Back-End e Front-End com Mario Souto | #HipstersPontoTube [edited]');

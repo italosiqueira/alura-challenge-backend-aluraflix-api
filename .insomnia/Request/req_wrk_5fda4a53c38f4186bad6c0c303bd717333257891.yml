@@ -1,0 +1,21 @@
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd717333257891
+type: Request
+parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
+modified: 1627304750891
+created: 1627221312028
+url: "{{ base_url }}/videos"
+name: Busca os vídeos registrados na plataforma.
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1627235085709.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

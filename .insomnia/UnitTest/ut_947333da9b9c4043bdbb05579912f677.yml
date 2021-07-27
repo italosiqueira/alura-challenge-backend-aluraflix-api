@@ -1,0 +1,11 @@
+_id: ut_947333da9b9c4043bdbb05579912f677
+type: UnitTest
+parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
+modified: 1627306044406
+created: 1627194198629
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd7173ebd36e5b
+name: Vídeo ID existe
+code: |-
+  const response = await insomnia.send();
+  expect(response.status).to.equal(200);
+  expect(response.data).to.be.an('string');

@@ -1,0 +1,21 @@
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd7173ebd36e5b
+type: Request
+parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
+modified: 1627304742402
+created: 1627257421959
+url: "{{ base_url }}/videos/{{ id }}"
+name: Remove um vídeo registrado na plataforma.
+description: ""
+method: DELETE
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1627205859735.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
