@@ -58,8 +58,6 @@ sls offline start
 
 Os testes da API Rest podem ser feitos pelo utilitário de linha de comando `curl` ou por um aplicativo de cliente de APIs. Optamos por esta última opção, utilizando o [Insomnia](https://insomnia.rest/).
 
-Em breve os testes unitários serão disponibilizados.
-
 <br/>
 <p style="text-align: center;">
     <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript">
