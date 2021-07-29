@@ -23,8 +23,8 @@ frameworkVersion: '2'
 # serverless-offline: para execução local da aplicação (note que serviços externos devem ser configurados independentementes)
 # serverless-dynamodb-local: para executar uma instância local do DynamoDB (evitar cobranças)
 plugins:
-  - serverless-offline
   - serverless-dynamodb-local
+  - serverless-offline
 
 custom:
   serverless-offline:

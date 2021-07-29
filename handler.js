@@ -1,11 +1,16 @@
 'use strict';
 
-// Biblioteca de desenvolvimento da AWS
-const AWS = require('aws-sdk');
+// Biblioteca de acesso à instância do DynamoDB (local ou remota)
+const dynamoDb = require('./config/dynamodb');
 // Biblioteca de manipulação de tempo
 const moment = require('moment');
 // Biblioteca para gerar identificadores únicos
 const { nanoid } = require('nanoid');
+
+const params = {
+  // process.env.<nome> refere-se ao valor de 'nome' definido no 'environment' do serverless.yml
+    TableName: process.env.VIDEOS_TABLE
+}
 
 class Video { 
   constructor(id, titulo, descricao, url) {
@@ -23,26 +28,6 @@ function isVideoValido(video) {
 
   return false;
 }
-
-/*
- * Instância de serviço DynamoDB dinâmica (offline vs. remota)
- */
-const dynamodbOfflineOptions = {
-  region: "localhost",
-  endpoint: "http://localhost:8000"
-}
-
-const params = {
-  // process.env.<nome> refere-se ao valor de 'nome' definido no 'environment' do serverless.yml
-	TableName: process.env.VIDEOS_TABLE
-}
-
-// Verifica se o modo de execução é local
-const isOffline = () => process.env.IS_OFFLINE;
-
-const dynamoDb = isOffline()
-  ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOptions)
-  : new AWS.DynamoDB.DocumentClient();
 
 module.exports.hello = async (event) => {
   return {
