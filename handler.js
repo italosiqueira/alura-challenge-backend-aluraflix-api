@@ -7,19 +7,15 @@ const moment = require('moment');
 // Biblioteca para gerar identificadores únicos
 const { nanoid } = require('nanoid');
 
+const { Video } = require('./db/models/Video');
+const { VideoService } = require('./services/VideoService');
+
+const VideoServiceInstance = new VideoService();
+
 const params = {
   // process.env.<nome> refere-se ao valor de 'nome' definido no 'environment' do serverless.yml
     TableName: process.env.VIDEOS_TABLE
 }
-
-class Video { 
-  constructor(id, titulo, descricao, url) {
-    this.id = id;
-    this.titulo = titulo;
-    this.descricao = descricao;
-    this.url = url;
-  }
-};
 
 function isVideoValido(video) {
   if (video.titulo && video.descricao && video.url) {
@@ -47,7 +43,8 @@ module.exports.listarVideos = async (event) => {
 
   try {
     // Método do DynamoDB para busca de informações a partir dos parâmetros
-    let videos = await dynamoDb.scan(params).promise();
+    // let videos = await dynamoDb.scan(params).promise();
+    let videos = await VideoServiceInstance.todosVideos();
 
     return {
       statusCode: 200,
