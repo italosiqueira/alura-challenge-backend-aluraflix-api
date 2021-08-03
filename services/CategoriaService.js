@@ -28,9 +28,16 @@ class CategoriaService {
     let categoria = { "id": nanoid(), "titulo": item.titulo, "cor": item.cor };
 
     if (!this.isCategoriaValida(categoria)) {
+      let messages = [];
+      for (var field in categoria) {
+        if (!categoria[field]) {
+          messages.push(`O campo ${field} é obrigatório.`);
+        }
+      }
+
       throw({ 
         name: 'MissingParameterException', 
-        message: 'One or more parameters are missing' });
+        message: messages });
     }
 
     await this.model.create(categoria);
@@ -48,9 +55,19 @@ class CategoriaService {
     let categoria = { "id": key, ... item };
     
     if (!this.isCategoriaValida(categoria)) {
-      throw({ 
-        name: 'MissingParameterException', 
-        message: 'One or more parameters are missing' });
+
+      if (!this.isCategoriaValida(categoria)) {
+        let messages = [];
+        for (var field in categoria) {
+          if (!categoria[field]) {
+            messages.push(`O campo ${field} é obrigatório.`);
+          }
+        }
+  
+        throw({ 
+          name: 'MissingParameterException', 
+          message: messages });
+      }
     }
 
     let documento = await this.model.update(
