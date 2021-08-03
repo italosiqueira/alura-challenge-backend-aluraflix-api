@@ -46,6 +46,8 @@ custom:
         sources:
           - table: ${self:provider.environment.VIDEOS_TABLE}
             sources: [./offline/migrations/videos-seed.json]
+          - table: ${self:provider.environment.CATEGORIAS_TABLE}
+            sources: [./offline/migrations/categorias-seed.json]
 
 provider:
   name: aws
@@ -73,6 +75,7 @@ provider:
 # self:<var> refere-se às variáveis especificadas no arquivo serverless.yml
   environment:
     VIDEOS_TABLE: 'VIDEOS'
+    CATEGORIAS_TABLE: 'CATEGORIAS'
 
 # you can add packaging information here
 package:
@@ -86,6 +89,36 @@ functions:
       - httpApi:
           path: /hello
           method: get
+  listarCategorias:
+    handler: handler.listarCategorias
+    events:
+      - httpApi:
+          path: /categorias
+          method: get
+  obterCategoria:
+    handler: handler.obterCategoria
+    events:
+      - httpApi:
+          path: /categorias/{categoriaId}
+          method: get
+  criarcategoria:
+    handler: handler.criarCategoria
+    events:
+      - httpApi:
+          path: /categorias
+          method: post
+  atualizarcategoria:
+    handler: handler.atualizarCategoria
+    events:
+      - httpApi:
+          path: /categorias/{categoriaId}
+          method: put
+  removerCategoria:
+    handler: handler.removerCategoria
+    events:
+      - httpApi:
+          path: /categorias/{categoriaId}
+          method: delete
   listarVideos:
     handler: handler.listarVideos
     events:
@@ -122,10 +155,23 @@ functions:
 # aprendizagem.
 resources:
   Resources:
-    PacientesTable:
+    VideosTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: ${self:provider.environment.VIDEOS_TABLE}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    CategoriasTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.CATEGORIAS_TABLE}
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
