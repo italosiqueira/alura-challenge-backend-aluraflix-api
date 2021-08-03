@@ -1,0 +1,52 @@
+[
+    {
+      "id": "1",
+      "titulo": "LIVRE",
+      "cor": "#000000"
+    },
+    {
+      "id": "2",
+      "titulo": "Ação",
+      "cor": "blue"
+    },
+    {
+      "id": "3",
+      "titulo": "Suspense",
+      "cor": "yellow"
+    },
+    {
+      "id": "4",
+      "titulo": "Terror",
+      "cor": "red"
+    },
+    {
+      "id": "5",
+      "titulo": "Aventura",
+      "cor": "green"
+    },
+    {
+      "id": "6",
+      "titulo": "Drama",
+      "cor": "orange"
+    },
+    {
+      "id": "7",
+      "titulo": "Fantasia",
+      "cor": "cyan"
+    },
+    {
+      "id": "8",
+      "titulo": "Musical",
+      "cor": "lime"
+    },
+    {
+      "id": "9",
+      "titulo": "Romance",
+      "cor": "Crimson"
+    },
+    {
+      "id": "10",
+      "titulo": "Biográfico",
+      "cor": "FloralWhite"
+    }
+]
