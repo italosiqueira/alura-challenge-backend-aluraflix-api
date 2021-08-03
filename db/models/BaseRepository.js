@@ -28,7 +28,10 @@ class BaseRepository {
     }
 
     delete(id) {
-
+        let hashKeyName = this.model.getHashKey();
+        return this.model.delete(id, { 
+            "condition": new dynamooseManager.Condition(hashKeyName).exists() 
+        });
     }
 }
 

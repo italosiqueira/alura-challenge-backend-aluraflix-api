@@ -76,6 +76,10 @@ class CategoriaService {
     
         return (documento) ? documento.serialize() : documento;
   }
+
+  async remover(id) {
+      await this.model.delete(id);
+  }
 }
 
 exports.CategoriaService = CategoriaService;
