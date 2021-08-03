@@ -145,17 +145,47 @@ module.exports.criarCategoria = async (event) => {
 };
 
 module.exports.atualizarCategoria = async (event) => {
-  return {
-    statusCode: 503,
-    body: JSON.stringify(
-      {
-        message: 'Not implemented!',
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
+  // extrai os dados de parâmetro na URL
+  const { categoriaId } = event.pathParameters;
+  
+  try {
+
+    // extrai os dados do corpo da requisição
+    let data = JSON.parse(event.body);
+
+    const { titulo, cor } = data;
+    
+    let categoria = await categoriaServiceInstance.atualizar(categoriaId, { titulo, cor });
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(
+        categoria,
+        null,
+        2
+      )
+    };
+
+  } catch (err) {
+
+    let error = err.name ? err.name : "Exception";
+    let message = err.message ? err.message : "Unknown error";
+    let statusCode = (error == 'MissingParameterException') ? 400 : 500;
+    
+    if (error == 'ConditionalCheckFailedException') {
+      error = 'ItemNotFoundException';
+      message = `Recurso com o ID ${categoriaId} não existe e não pode ser atualizado`;
+      statusCode = 404;
+    }
+
+    return {
+      statusCode,
+      body: JSON.stringify({
+        error,
+        message
+      }),
+    };
+  }
 };
 
 module.exports.removerCategoria = async (event) => {

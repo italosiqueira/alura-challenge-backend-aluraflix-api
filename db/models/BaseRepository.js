@@ -20,6 +20,13 @@ class BaseRepository {
         return this.model.scan().exec();
     }
 
+    update(keyObject, modelObject) {
+        let hashKeyName = this.model.getHashKey();
+        return this.model.update(keyObject, modelObject, {
+            "condition": new dynamooseManager.Condition(hashKeyName).exists()
+        });
+    }
+
     delete(id) {
 
     }

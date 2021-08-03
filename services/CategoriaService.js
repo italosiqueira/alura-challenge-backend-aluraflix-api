@@ -27,8 +27,6 @@ class CategoriaService {
 
     let categoria = { "id": nanoid(), "titulo": item.titulo, "cor": item.cor };
 
-    console.log('CategoriaService::criar::item: ', categoria);
-
     if (!this.isCategoriaValida(categoria)) {
       throw({ 
         name: 'MissingParameterException', 
@@ -43,6 +41,23 @@ class CategoriaService {
   async obter(id) {
     let documento = await this.model.findOne(id);
     return (documento) ? documento.serialize() : documento;
+  }
+
+  async atualizar(key, item) {
+
+    let categoria = { "id": key, ... item };
+    
+    if (!this.isCategoriaValida(categoria)) {
+      throw({ 
+        name: 'MissingParameterException', 
+        message: 'One or more parameters are missing' });
+    }
+
+    let documento = await this.model.update(
+        { 'id': categoria.id }, 
+        { 'titulo': categoria.titulo, 'cor': categoria.cor });
+    
+        return (documento) ? documento.serialize() : documento;
   }
 }
 
