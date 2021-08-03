@@ -189,17 +189,43 @@ module.exports.atualizarCategoria = async (event) => {
 };
 
 module.exports.removerCategoria = async (event) => {
-  return {
-    statusCode: 503,
-    body: JSON.stringify(
-      {
-        message: 'Not implemented!',
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
+  
+  // extrai os dados de parâmetro na URL
+  const { categoriaId } = event.pathParameters;
+  
+  try {
+    
+    await categoriaServiceInstance.remover(categoriaId);
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(
+        `Recurso com o ID ${categoriaId} removido`,
+        null,
+        2
+      )
+    };
+
+  } catch (err) {
+
+    let error = err.name ? err.name : "Exception";
+    let message = err.message ? err.message : "Unknown error";
+    let statusCode = err.statusCode ? err.statusCode : 500;
+    
+    if (error == 'ConditionalCheckFailedException') {
+      error = 'ItemNotFoundException';
+      message = `Recurso com o ID ${categoriaId} não existe e não pode ser removido`;
+      statusCode = 404;
+    }
+
+    return {
+      statusCode,
+      body: JSON.stringify({
+        error,
+        message,
+      }),
+    };
+  }
 };
 
 module.exports.listarVideos = async (event) => {
