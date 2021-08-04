@@ -231,14 +231,12 @@ module.exports.removerCategoria = async (event) => {
 module.exports.listarVideos = async (event) => {
 
   try {
-    // Método do DynamoDB para busca de informações a partir dos parâmetros
-    // let videos = await dynamoDb.scan(params).promise();
     let videos = await videoServiceInstance.todosVideos();
 
     return {
       statusCode: 200,
       body: JSON.stringify(
-        videos.Items,
+        videos,
         null,
         2
       ),
@@ -262,18 +260,7 @@ module.exports.obterVideo = async (event) => {
 
   try {
 
-    /* 
-     * Método do DynamoDB para obter um registro específico a partir 
-     * da Partition Key (Chave Primária)
-     */
-    let data = await dynamoDb.get({
-        ... params, 
-        Key: { 
-          id: videoId 
-        }
-    }).promise();
-
-    const video = data.Item;
+    let video = await videoServiceInstance.obter(videoId);
 
     // Se video não for válido
     if(!video) {
@@ -319,22 +306,7 @@ module.exports.criarVideo = async (event) => {
 
     const { titulo, descricao, url } = data;
     
-    let video = new Video(nanoid(), titulo, descricao, url);
-
-    if (!isVideoValido(video)) {
-      throw({ 
-        statusCode: 400, 
-        name: 'MissingParameterException', 
-        message: 'One or more parameters are missing' });
-    }
-
-    /* 
-     * Método do DynamoDB para gravar informações na base de dados
-     */
-    await dynamoDb.put({
-        ... params, 
-        Item: video
-    }).promise();
+    let video = await videoServiceInstance.criar({ titulo, descricao, url });
 
     return {
       statusCode: 201,
@@ -346,11 +318,16 @@ module.exports.criarVideo = async (event) => {
     };
 
   } catch (err) {
+    
+    let error = err.name ? err.name : "Exception";
+    let message = err.message ? err.message : "Unknown error";
+    let statusCode = (error == 'MissingParameterException') ? 400 : 500;
+    
     return {
-      statusCode: err.statusCode ? err.statusCode : 500,
+      statusCode,
       body: JSON.stringify({
-        error: err.name ? err.name : "Exception",
-        message: err.message ? err.message : "Unknown error",
+        error,
+        message
       }),
     };
   }
@@ -368,53 +345,7 @@ module.exports.atualizarVideo = async (event) => {
 
     const { titulo, descricao, url } = data;
     
-    let video = new Video(videoId, titulo, descricao, url);
-
-    if (!isVideoValido(video)) {
-      throw({ 
-        statusCode: 400, 
-        name: 'MissingParameterException', 
-        message: 'One or more parameters are missing' });
-    }
-
-    /* 
-     * Método do DynamoDB para atualizar informações na base de dados
-     */
-    await dynamoDb.update({
-        ... params, 
-        Key: {
-          id: video.id
-        },
-        /* 
-         * UpdateExpression utiliza uma Expression Syntax do DynamoDB (como um SQL).
-         * 
-         * Informa os campos que serão atualizados e os novos valores (a serem 
-         * substituídos na expressão).
-         */
-        UpdateExpression: 'SET titulo = :titulo, descricao = :descricao, #u = :url',
-        /* 
-         * ConditionExpression utiliza uma Expression Syntax do DynamoDB (como um SQL).
-         * 
-         * Seria como a nossa cláusula WHERE , indicando uma condição a ser satisfeita.
-         * Sem esta condição, não seria possível tratar os casos onde não há paciente com
-         * o identificador informado.
-         */
-        ConditionExpression: 'attribute_exists(id)',
-        /* 
-        * ExpressionAttributeValues utiliza uma Expression Syntax do DynamoDB.
-        * 
-        * Especificao os placeholders que podem ser utilizados pela UpdateExpression
-        * acima e os seus valores.
-        */
-        ExpressionAttributeValues: {
-          ':titulo' : video.titulo,
-          ':descricao' : video.descricao,
-          ':url' : video.url
-        },
-        ExpressionAttributeNames: {
-          '#u': 'url'
-        }
-    }).promise();
+    let video = await videoServiceInstance.atualizar(videoId, { titulo, descricao, url });
 
     return {
       statusCode: 200,
@@ -429,7 +360,7 @@ module.exports.atualizarVideo = async (event) => {
 
     let error = err.name ? err.name : "Exception";
     let message = err.message ? err.message : "Unknown error";
-    let statusCode = err.statusCode ? err.statusCode : 500;
+    let statusCode = (error == 'MissingParameterException') ? 400 : 500;
     
     if (error == 'ConditionalCheckFailedException') {
       error = 'ItemNotFoundException';
@@ -454,24 +385,8 @@ module.exports.removerVideo = async (event) => {
   
   try {
     
-    /* 
-     * Método do DynamoDB para remover informações na base de dados
-     */
-    await dynamoDb.delete({
-        ... params, 
-        Key: {
-          id: videoId
-        },
-        /* 
-         * ConditionExpression utiliza uma Expression Syntax do DynamoDB (como um SQL).
-         * 
-         * Seria como a nossa cláusula WHERE , indicando uma condição a ser satisfeita.
-         * Sem esta condição, não seria possível tratar os casos onde não há paciente com
-         * o identificador informado.
-         */
-        ConditionExpression: 'attribute_exists(id)'
-    }).promise();
-
+    await videoServiceInstance.remover(videoId);
+    
     return {
       statusCode: 200,
       body: JSON.stringify(

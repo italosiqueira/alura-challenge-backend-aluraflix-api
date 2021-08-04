@@ -1,22 +1,82 @@
 'use strict'
 
-// Biblioteca de acesso à instância do DynamoDB (local ou remota)
-const dynamoDb = require('../config/dynamodb');
+// Biblioteca para gerar identificadores únicos
+const { nanoid } = require('nanoid');
 
-const params = {
-  // process.env.<nome> refere-se ao valor de 'nome' definido no 'environment' do serverless.yml
-  TableName: process.env.VIDEOS_TABLE
-};
+const VideoRepository = require('../db/models/VideoRepository');
 
 class VideoService {
 
-  constructor() { }
+  constructor() {
+    this.model = new VideoRepository();
+  }
 
-  async todosVideos() {
-    console.log('VideoService::todosVideos');
-    return await dynamoDb.scan(params).promise();
-  };
+  isVideoValido(video) {
+    if (video.titulo && video.descricao && video.url) {
+      return true;
+    }
   
+    return false;
+  }
+
+  todosVideos() {
+    return this.model.findAll();
+  };
+
+  async criar(item) {
+
+    let video = { "id": nanoid(), "titulo": item.titulo, "descricao": item.descricao, "url": item.url };
+
+    if (!this.isVideoValido(video)) {
+      let messages = [];
+      for (var field in video) {
+        if (!video[field]) {
+          messages.push(`O campo ${field} é obrigatório.`);
+        }
+      }
+
+      throw({ 
+        name: 'MissingParameterException', 
+        message: messages });
+    }
+
+    await this.model.create(video);
+
+    return video;
+  }
+
+  async obter(id) {
+    let documento = await this.model.findOne(id);
+    return (documento) ? documento.serialize() : documento;
+  }
+
+  async atualizar(key, item) {
+
+    let video = { "id": key, ... item };
+    
+    if (!this.isVideoValido(video)) {
+      let messages = [];
+      for (var field in video) {
+        if (!video[field]) {
+          messages.push(`O campo ${field} é obrigatório.`);
+        }
+      }
+
+      throw({ 
+        name: 'MissingParameterException', 
+        message: messages });
+    }
+
+    let documento = await this.model.update(
+        { 'id': video.id }, 
+        { 'titulo': video.titulo, 'descricao': video.descricao, 'url': video.url });
+    
+        return (documento) ? documento.serialize() : documento;
+  }
+
+  async remover(id) {
+      await this.model.delete(id);
+  }
 }
 
 exports.VideoService = VideoService;
