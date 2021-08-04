@@ -19,7 +19,7 @@ class VideoService {
     return false;
   }
 
-  todosVideos() {
+  listarTodos() {
     return this.model.findAll();
   };
 

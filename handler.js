@@ -230,7 +230,7 @@ module.exports.removerCategoria = async (event) => {
 module.exports.listarVideos = async (event) => {
 
   try {
-    let videos = await videoServiceInstance.todosVideos();
+    let videos = await videoServiceInstance.listarTodos();
 
     return {
       statusCode: 200,
