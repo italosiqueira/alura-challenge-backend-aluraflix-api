@@ -1,1 +1,128 @@
-[{"id":"4bSBOtWLUoTq8BjhbEDu0","titulo":"Conheça o canal da Alura!","descricao":"Aqui você vai acompanhar conteúdos de Tecnologia, Design e UX tanto em aulas curtas e práticas, quanto em webséries, como o Hipsters Ponto Tube e bate-papos com referências da área.","url":"https://www.youtube.com/watch?v=94yuIVdoevc"},{"id":"doCKss05W-u1T4aN_oZcm","titulo":"Diferença entre Back-End e Front-End com Mario Souto | #HipstersPontoTube","descricao":"Qual a diferença entre Back-end e Front-end? É possível se especializar nas duas áreas? Como é a rotina desses profissionais e com quais outras áreas da tecnologia acabam se relacionando?","url":"https://www.youtube.com/watch?v=xrRy3RI3HE4"},{"id":"6Pku7MLiLQYt7ge1QIKHQ","titulo":"API Rest com .NET Core 5: Operações essenciais com verbos HTTP | Hipsters.Talks","descricao":"Afinal, o que é uma API, quais os principais verbos HTTP e como controlar as informações que o usuário pode enviar?","url":"https://www.youtube.com/watch?v=ANFeKY8E4_I"}]
+[
+  {
+    "id": "1",
+    "categoriaId": "1",
+    "titulo": "O que faz uma desenvolvedora front-end?",
+    "descricao": "O que é Front-end? Trabalhando na área os termos HTML, CSS e JavaScript fazem parte da rotina das desenvolvedoras e desenvolvedores. Mas o que eles fazem, afinal? Descubra com a Vanessa!",
+    "url": "https://www.youtube.com/watch?v=ZY3-MFxVdEw"
+  },
+  {
+    "id": "2",
+    "categoriaId": "1",
+    "titulo": "O que é REST?",
+    "descricao": "Nesse video o instrutor Giovanni Tempobono explica o que é REST, da onde veio e para que serve!",
+    "url": "https://www.youtube.com/watch?v=weQ8ssA6iBU"
+  },
+  {
+    "id": "4",
+    "categoriaId": "1",
+    "titulo": "NGINX: Servidor Web, Proxy Reverso e API Gateway",
+    "descricao": "Gabs Ferreira conversou com o @Dias de Dev, que é instrutor aqui da Alura e criou  nosso novo curso de NGINX",
+    "url": "https://www.youtube.com/watch?v=I4oydqod7j0"
+  },
+  {
+    "id": "5",
+    "categoriaId": "1",
+    "titulo": "Evolução do C++",
+    "descricao": "O que mudou durante a evolução da linguagem C e quais são, de fato, as novidades do C++ moderno? Nosso instrutor, Vinicius Dias, explica nesse vídeo esse processo de evolução e que novidades surgiram.",
+    "url": "https://www.youtube.com/watch?v=_n5hLYGjdfk"
+  },
+  {
+    "id": "6",
+    "categoriaId": "10",
+    "titulo": "Java, Spring, Microserviços e vagas na Hotmart",
+    "descricao": "Nessa live, Paulo Silveira conversa sobre a evolução do Java em microsserviços e sobre o caso da Hotmart com Marco Aurélio Ribeiro, especialista em desenvolvimento com 17 anos de carreira e trooper da Hotmart há mais de seis anos.",
+    "url": "https://www.youtube.com/watch?v=f46tw7lOt_0"
+  },
+  {
+    "id": "7",
+    "categoriaId": "10",
+    "titulo": "O que é Data Science?",
+    "descricao": "Python é o novo Excel? Para que serve o R, Pandas e Jupyter? E qual é, afinal, a diferença entre o Data Science, Business Intelligence e Machine Learning? Descubra no primeiro episódio de Hipsters Ponto Tube!",
+    "url": "https://www.youtube.com/watch?v=5b9Z8toVaAU"
+  },
+  {
+    "id": "8",
+    "categoriaId": "10",
+    "titulo": "Aprenda tudo sobre Data Science, seus primeiros passos",
+    "descricao": "Você é entusiasta de Inteligência artificial, é do mundo Python, de BI etc e quer aprender sobre Data Science? Preparamos este curso pra você!",
+    "url": "https://www.youtube.com/watch?v=IQdISZCosAE"
+  },
+  {
+    "id": "9",
+    "categoriaId": "10",
+    "titulo": "Quais as profissões em Ciência de Dados? com Mikaeri Ohana",
+    "descricao": "Quer saber qual carreira seguir na área de Ciência de Dados? A Mikaeri Ohana, especialista em Data Science, te ajuda a descobrir alguns caminhos para mergulhar nessa profissão.",
+    "url": "https://www.youtube.com/watch?v=5CHLH9LU1Uc"
+  },
+  {
+    "id": "10",
+    "categoriaId": "10",
+    "titulo": "Aprenda a transformar design em código com o Figma",
+    "descricao": "A Rafaella Ballerini, instrutora de Front-End na Alura, vem trazer várias dicas pra você transformar o design em código. Aprenda como exportar imagens, ícones e inspecionar os elementos direto do Figma.",
+    "url": "https://www.youtube.com/watch?v=sup2hlWm5yE"
+  },
+  {
+    "id": "11",
+    "categoriaId": "10",
+    "titulo": "Qual é a diferença entre back-end e front-end?",
+    "descricao": "Afinal, existe diferença entre back-end e front-end? Nesse Alura+, o nosso instrutor Vinícius Dias vai responder a essa questão tão recorrente no mundo do desenvolvimento.",
+    "url": "https://www.youtube.com/watch?v=a-l4z6V2yXA"
+  },
+  {
+    "id": "12",
+    "categoriaId": "10",
+    "titulo": "Introdução ao Postman",
+    "descricao": "As APIs são muito utilizadas para integrações de sistemas diversos. Mas, como fazer testes com elas sem utilizar um navegador e verificar seu retorno? O Vinicius Dias explica neste vídeo utilizando a ferramenta Postman.",
+    "url": "https://www.youtube.com/watch?v=op81bMbgZXs"
+  },
+  {
+    "id": "13",
+    "categoriaId": "10",
+    "titulo": "O que é ORM?",
+    "descricao": "Afinal, o que é, como funciona e para que serve um ORM? O instrutor Guilherme Lima explica neste Alura+ com exemplos práticos e simplificados.",
+    "url": "https://www.youtube.com/watch?v=x39vqeBTUmE"
+  },
+  {
+    "id": "14",
+    "categoriaId": "10",
+    "titulo": "O que é Deep Learning?",
+    "descricao": "Afinal, o que é Deep Learning e onde se aplica? O Gui Silveira explica neste vídeo além de outros conceitos que rodeiam este tema como as redes neurais densas, estimadores, classificadores e mais.",
+    "url": "https://www.youtube.com/watch?v=kryIBKPVZ7A"
+  },
+  {
+    "id": "15",
+    "categoriaId": "10",
+    "titulo": "O que é ReactJS?",
+    "descricao": "Neste vídeo, Vanessa Tonini e Mario Souto explicam isto para você falando sobre como esta ferramenta surgiu, para que ela serve, quais são suas aplicações e relação com outras ferramentas e como começar a trabalhar com ela.",
+    "url": "https://www.youtube.com/watch?v=6IuQUgeDPg0"
+  },
+  {
+    "id": "16",
+    "categoriaId": "10",
+    "titulo": "Quais as melhores práticas com React?",
+    "descricao": "Recebemos o @Dev Soutinho nesse Hipsters Ponto Tube para falar sobre as melhores práticas com React e como você pode aproveitar melhor as possibilidades dessa tecnologia no cenário atual.",
+    "url": "https://www.youtube.com/watch?v=k77WZrvuDQU"
+  },
+  {
+    "id": "4bSBOtWLUoTq8BjhbEDu0",
+    "categoriaId": "10",
+    "titulo": "Conheça o canal da Alura!",
+    "descricao": "Aqui você vai acompanhar conteúdos de Tecnologia, Design e UX tanto em aulas curtas e práticas, quanto em webséries, como o Hipsters Ponto Tube e bate-papos com referências da área.",
+    "url": "https://www.youtube.com/watch?v=94yuIVdoevc"
+  },
+  {
+    "id": "doCKss05W-u1T4aN_oZcm",
+    "categoriaId": "10",
+    "titulo": "Diferença entre Back-End e Front-End com Mario Souto | #HipstersPontoTube",
+    "descricao": "Qual a diferença entre Back-end e Front-end? É possível se especializar nas duas áreas? Como é a rotina desses profissionais e com quais outras áreas da tecnologia acabam se relacionando?",
+    "url": "https://www.youtube.com/watch?v=xrRy3RI3HE4"
+  },
+  {
+    "id": "6Pku7MLiLQYt7ge1QIKHQ",
+    "categoriaId": "10",
+    "titulo": "API Rest com .NET Core 5: Operações essenciais com verbos HTTP | Hipsters.Talks",
+    "descricao": "Afinal, o que é uma API, quais os principais verbos HTTP e como controlar as informações que o usuário pode enviar?",
+    "url": "https://www.youtube.com/watch?v=ANFeKY8E4_I"
+  }
+]
