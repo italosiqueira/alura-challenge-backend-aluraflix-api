@@ -234,13 +234,40 @@ module.exports.listarVideos = async (event) => {
       event.queryStringParameters.titulo : 
       undefined;
     
-    console.log(titulo);
-    
     let videos = 
       (titulo) ? 
         await videoServiceInstance.listarPorTitulo(titulo) : 
         await videoServiceInstance.listarTodos();
 
+    return {
+      statusCode: 200,
+      body: JSON.stringify(
+        videos,
+        null,
+        2
+      ),
+    };
+  } catch (err) {
+    console.log("Error", err);
+    return {
+      statusCode: err.statusCode ? err.statusCode : 500,
+      body: JSON.stringify({
+        error: err.name ? err.name : "Exception",
+        message: err.message ? err.message : "Unknown error",
+      }),
+    };
+  }
+};
+
+module.exports.listarVideosCategoria = async (event) => {
+
+  try {
+
+    // extrai os dados de parâmetro na URL
+    const { categoriaId } = event.pathParameters;
+    
+    let videos = await videoServiceInstance.listarPorCategoria(categoriaId);
+    
     return {
       statusCode: 200,
       body: JSON.stringify(

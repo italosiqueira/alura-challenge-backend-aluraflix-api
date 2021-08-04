@@ -24,7 +24,11 @@ class VideoService {
   }
 
   async listarPorTitulo(titulo) {
-    return this.model.queryAll('titulo', titulo);
+    return this.model.queryAll('titulo', titulo, false);
+  }
+
+  async listarPorCategoria(categoriaId) {
+    return this.model.queryAll('categoriaId', categoriaId);
   }
 
   async criar(item) {
