@@ -12,7 +12,7 @@ class VideoService {
   }
 
   isVideoValido(video) {
-    if (video.titulo && video.descricao && video.url) {
+    if (video.categoriaId && video.titulo && video.descricao && video.url) {
       return true;
     }
   
@@ -25,7 +25,7 @@ class VideoService {
 
   async criar(item) {
 
-    let video = { "id": nanoid(), "titulo": item.titulo, "descricao": item.descricao, "url": item.url };
+    let video = { "id": nanoid(), ... item };
 
     if (!this.isVideoValido(video)) {
       let messages = [];
@@ -69,7 +69,7 @@ class VideoService {
 
     let documento = await this.model.update(
         { 'id': video.id }, 
-        { 'titulo': video.titulo, 'descricao': video.descricao, 'url': video.url });
+        { 'categoriaId': video.categoriaId, 'titulo': video.titulo, 'descricao': video.descricao, 'url': video.url });
     
         return (documento) ? documento.serialize() : documento;
   }

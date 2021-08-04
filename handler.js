@@ -303,9 +303,9 @@ module.exports.criarVideo = async (event) => {
     // extrai os dados do corpo da requisição
     let data = JSON.parse(event.body);
 
-    const { titulo, descricao, url } = data;
+    const { categoriaId, titulo, descricao, url } = data;
     
-    let video = await videoServiceInstance.criar({ titulo, descricao, url });
+    let video = await videoServiceInstance.criar({ categoriaId, titulo, descricao, url });
 
     return {
       statusCode: 201,
@@ -342,9 +342,9 @@ module.exports.atualizarVideo = async (event) => {
     // extrai os dados do corpo da requisição
     let data = JSON.parse(event.body);
 
-    const { titulo, descricao, url } = data;
+    const { categoriaId, titulo, descricao, url } = data;
     
-    let video = await videoServiceInstance.atualizar(videoId, { titulo, descricao, url });
+    let video = await videoServiceInstance.atualizar(videoId, { categoriaId, titulo, descricao, url });
 
     return {
       statusCode: 200,
