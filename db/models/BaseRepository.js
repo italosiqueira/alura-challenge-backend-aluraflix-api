@@ -20,6 +20,11 @@ class BaseRepository {
         return this.model.scan().exec();
     }
 
+    queryAll(queryKey, queryValue) {
+        // TODO Adicionar suporte a Numbers e Dates?
+        return this.model.scan(queryKey).contains(queryValue).exec();
+    }
+
     update(keyObject, modelObject) {
         let hashKeyName = this.model.getHashKey();
         return this.model.update(keyObject, modelObject, {

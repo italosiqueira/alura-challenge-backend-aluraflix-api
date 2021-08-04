@@ -230,7 +230,16 @@ module.exports.removerCategoria = async (event) => {
 module.exports.listarVideos = async (event) => {
 
   try {
-    let videos = await videoServiceInstance.listarTodos();
+    const titulo = event.queryStringParameters ? 
+      event.queryStringParameters.titulo : 
+      undefined;
+    
+    console.log(titulo);
+    
+    let videos = 
+      (titulo) ? 
+        await videoServiceInstance.listarPorTitulo(titulo) : 
+        await videoServiceInstance.listarTodos();
 
     return {
       statusCode: 200,

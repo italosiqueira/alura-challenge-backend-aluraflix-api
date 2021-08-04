@@ -21,11 +21,20 @@ class VideoService {
 
   listarTodos() {
     return this.model.findAll();
-  };
+  }
+
+  async listarPorTitulo(titulo) {
+    return this.model.queryAll('titulo', titulo);
+  }
 
   async criar(item) {
 
     let video = { "id": nanoid(), ... item };
+
+    // Regra: Caso categoriaId não seja especificado, atribuir o valor de "1"
+    if (!video.hasOwnProperty("categoriaId") || !video["categoriaId"]) {
+      video.categoriaId = '1';
+    }
 
     if (!this.isVideoValido(video)) {
       let messages = [];
