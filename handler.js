@@ -7,7 +7,6 @@ const moment = require('moment');
 // Biblioteca para gerar identificadores únicos
 const { nanoid } = require('nanoid');
 
-const { Video } = require('./db/models/Video');
 const { VideoService } = require('./services/VideoService');
 const { CategoriaService } = require('./services/CategoriaService');
 
