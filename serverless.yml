@@ -101,6 +101,12 @@ functions:
       - httpApi:
           path: /categorias/{categoriaId}
           method: get
+  listarVideosCategoria:
+    handler: handler.listarVideosCategoria
+    events:
+      - httpApi:
+          path: /categorias/{categoriaId}/videos
+          method: get
   criarcategoria:
     handler: handler.criarCategoria
     events:
