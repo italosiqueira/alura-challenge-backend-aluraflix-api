@@ -4,11 +4,26 @@ const dynamooseManager = require('../../config/dynamoose');
 
 const schema = new dynamooseManager.Schema(
   {
-    id: String,
-    categoriaId: String,
-    titulo: String,
-    descricao: String,
-    url: String
+    "id": {
+      "type": String,
+      "required": true
+    },
+    "categoriaId": {
+      "type": String,
+      "required": true
+    },
+    "titulo": {
+      "type": String,
+      "required": true
+    },
+    "descricao": {
+      "type": String,
+      "required": true
+    },
+    "url": {
+      "type": String,
+      "required": true
+    }
   }
 );
 
