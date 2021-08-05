@@ -1,7 +1,7 @@
 _id: req_wrk_5fda4a53c38f4186bad6c0c303bd71735bc1a22b
 type: Request
 parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
-modified: 1627304748728
+modified: 1628123159296
 created: 1627248859291
 url: "{{ base_url }}/videos/{{ id }}"
 name: Atualiza um vídeo registrado na plataforma.
@@ -11,6 +11,7 @@ body:
   mimeType: application/json
   text: >-
     {
+    		"categoriaId": "10",
         "titulo": "Conheça o canal da Alura! Nova edição!",
         "url": "https://www.youtube.com/watch?v=94yuIVdoevc",
         "descricao": "Aqui você vai acompanhar conteúdos de Tecnologia, Design e UX tanto em aulas curtas e práticas, quanto em webséries, como o Hipsters Ponto Tube e bate-papos com referências da área."
