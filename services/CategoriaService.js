@@ -19,8 +19,8 @@ class CategoriaService {
     return false;
   }
 
-  listarTodos() {
-    return this.model.findAll();
+  listarTodos(page) {
+    return this.model.findAll(page);
   }
 
   async criar(item) {

@@ -42,7 +42,11 @@ module.exports.hello = async (event) => {
 
 module.exports.listarCategorias = async (event) => {
   try {
-    let categorias = await categoriaServiceInstance.listarTodos();
+
+    const { page } = 
+      event.queryStringParameters || [undefined];
+
+    let categorias = await categoriaServiceInstance.listarTodos(page);
 
     return {
       statusCode: 200,
@@ -230,14 +234,14 @@ module.exports.removerCategoria = async (event) => {
 module.exports.listarVideos = async (event) => {
 
   try {
-    const titulo = event.queryStringParameters ? 
-      event.queryStringParameters.titulo : 
-      undefined;
     
+    const { titulo, page } = 
+      event.queryStringParameters || [undefined, undefined];
+
     let videos = 
       (titulo) ? 
         await videoServiceInstance.listarPorTitulo(titulo) : 
-        await videoServiceInstance.listarTodos();
+        await videoServiceInstance.listarTodos(page);
 
     return {
       statusCode: 200,

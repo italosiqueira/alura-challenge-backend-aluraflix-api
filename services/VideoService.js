@@ -19,12 +19,12 @@ class VideoService {
     return false;
   }
 
-  listarTodos() {
-    return this.model.findAll();
+  async listarTodos(page) {
+    return this.model.findAll(page);
   }
 
   async listarPorTitulo(titulo) {
-    return this.model.queryAll('titulo', titulo, false);
+    return this.model.queryAll('titulo', titulo);
   }
 
   async listarPorCategoria(categoriaId) {

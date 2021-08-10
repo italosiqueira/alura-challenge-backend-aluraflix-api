@@ -16,14 +16,37 @@ class BaseRepository {
         return this.model.get(id);
     }
 
-    findAll() {
+    async findAll(page) {
+        if (page) {
+            return this.findAllPaged(page);
+        }
         return this.model.scan().exec();
     }
 
-    queryAll(queryKey, queryValue, strictMode = true) {
-        return strictMode ? 
-            this.model.scan(queryKey).eq(queryValue).exec() : 
-            this.model.scan(queryKey).contains(queryValue).exec();
+    async findAllPaged(pageNumber, size = 5) {
+
+        if (pageNumber <= 0) {
+            return [];
+        }
+        
+        // First page, no lastKey for use
+        let currentPage = 0;
+        let response = await this.model.scan().limit(size).exec();
+
+        while (++currentPage < pageNumber && response.lastKey != undefined) {
+            response = await this.model.scan().startAt(response.lastKey).limit(size).exec();
+        }
+
+        return (currentPage == pageNumber) ? response : [];
+    }
+
+    async queryAll(queryKey, queryValue, strictMode = false) {
+
+        const conditionalQuery = strictMode ? 
+            this.model.scan(queryKey).eq(queryValue) :
+            this.model.scan(queryKey).contains(queryValue);
+        
+        return conditionalQuery.exec();
     }
 
     update(keyObject, modelObject) {
