@@ -16,6 +16,10 @@ class BaseRepository {
         return this.model.get(id);
     }
 
+    findMany(ids) {
+        return this.model.scan("id").in(ids).exec();
+    }
+
     async findAll(page) {
         if (page) {
             return this.findAllPaged(page);

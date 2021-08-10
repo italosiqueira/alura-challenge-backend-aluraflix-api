@@ -131,6 +131,12 @@ functions:
       - httpApi:
           path: /videos
           method: get
+  listarVideosPublicos:
+    handler: handler.listarVideosPublicos
+    events:
+      - httpApi:
+          path: /videos/free
+          method: get
   obterVideo:
     handler: handler.obterVideo
     events:

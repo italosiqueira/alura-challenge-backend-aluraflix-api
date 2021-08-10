@@ -263,6 +263,33 @@ module.exports.listarVideos = async (event) => {
   }
 };
 
+module.exports.listarVideosPublicos = async (event) => {
+
+  try {
+
+    let videos = 
+        await videoServiceInstance.listarTodosPublicos();
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(
+        videos,
+        null,
+        2
+      ),
+    };
+  } catch (err) {
+    console.log("Error", err);
+    return {
+      statusCode: err.statusCode ? err.statusCode : 500,
+      body: JSON.stringify({
+        error: err.name ? err.name : "Exception",
+        message: err.message ? err.message : "Unknown error",
+      }),
+    };
+  }
+};
+
 module.exports.listarVideosCategoria = async (event) => {
 
   try {

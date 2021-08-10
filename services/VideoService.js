@@ -23,6 +23,10 @@ class VideoService {
     return this.model.findAll(page);
   }
 
+  async listarTodosPublicos() {
+    return this.model.findMany(Array.from(Array(5).keys()).map((_,idx) => `${idx + 1}`));
+  }
+
   async listarPorTitulo(titulo) {
     return this.model.queryAll('titulo', titulo);
   }
