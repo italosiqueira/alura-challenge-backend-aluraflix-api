@@ -7,3 +7,6 @@ jspm_packages
 
 # DynamoDB Local directories
 .dynamodb
+
+# Sensitive config files
+secrets.json
