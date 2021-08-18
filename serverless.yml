@@ -48,11 +48,18 @@ custom:
             sources: [./offline/migrations/videos-seed.json]
           - table: ${self:provider.environment.CATEGORIAS_TABLE}
             sources: [./offline/migrations/categorias-seed.json]
+  secrets: ${file(secrets.json)}
 
 provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  httpApi:
+    authorizers:
+      customAuthorizer:
+        type: request
+        payloadVersion: '1.0'
+        functionName: verify-token
 
 # you can overwrite defaults here
   stage: dev
@@ -76,6 +83,7 @@ provider:
   environment:
     VIDEOS_TABLE: 'VIDEOS'
     CATEGORIAS_TABLE: 'CATEGORIAS'
+    JWT_SECRET: ${self:custom.secrets.JWT_SECRET}
 
 # you can add packaging information here
 package:
@@ -83,6 +91,8 @@ package:
     - '!.dynamodb/**'
 
 functions:
+  verify-token:
+    handler: middlewares/middleware-auth.auth
   hello:
     handler: handler.hello
     events:
@@ -95,42 +105,49 @@ functions:
       - httpApi:
           path: /categorias
           method: get
+          authorizer: verify-token
   obterCategoria:
     handler: handler.obterCategoria
     events:
       - httpApi:
           path: /categorias/{categoriaId}
           method: get
+          authorizer: verify-token
   listarVideosCategoria:
     handler: handler.listarVideosCategoria
     events:
       - httpApi:
           path: /categorias/{categoriaId}/videos
           method: get
+          authorizer: verify-token
   criarcategoria:
     handler: handler.criarCategoria
     events:
       - httpApi:
           path: /categorias
           method: post
+          authorizer: verify-token
   atualizarcategoria:
     handler: handler.atualizarCategoria
     events:
       - httpApi:
           path: /categorias/{categoriaId}
           method: put
+          authorizer: verify-token
   removerCategoria:
     handler: handler.removerCategoria
     events:
       - httpApi:
           path: /categorias/{categoriaId}
           method: delete
+          authorizer: verify-token
   listarVideos:
     handler: handler.listarVideos
     events:
       - httpApi:
           path: /videos
           method: get
+          authorizer: verify-token
   listarVideosPublicos:
     handler: handler.listarVideosPublicos
     events:
@@ -143,24 +160,28 @@ functions:
       - httpApi:
           path: /videos/{videoId}
           method: get
+          authorizer: verify-token
   criarVideo:
     handler: handler.criarVideo
     events:
       - httpApi:
           path: /videos
           method: post
+          authorizer: verify-token
   atualizarVideo:
     handler: handler.atualizarVideo
     events:
       - httpApi:
           path: /videos/{videoId}
           method: put
+          authorizer: verify-token
   removerVideo:
     handler: handler.removerVideo
     events:
       - httpApi:
           path: /videos/{videoId}
           method: delete
+          authorizer: verify-token
 
 # Provisionamento de uma tabela no SGBD AWS DynamoDB. Note a reserva de 
 # recursos, lá embaixo. É mínima por tratar-se de um pequeno projeto de 
