@@ -94,6 +94,8 @@ provider:
 package:
   patterns:
     - '!.dynamodb/**'
+    - '!.insomnia/**'
+    - '!secrets.json.example'
 
 functions:
   # Nossa função que provê a autenticação e validação das requisições, como definido acima
