@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwtUtil = require('../util/JwtTokenUtil');
 
 // Função auxiliar
 const generatePolicy = (principalId, effect, resource) => {
@@ -21,7 +21,6 @@ const generatePolicy = (principalId, effect, resource) => {
 };
 
 module.exports.auth = (event, context, callback) => {
-  console.log('event', event);
   
   if (!event.authorizationToken) {
     // Token não enviado
@@ -39,8 +38,7 @@ module.exports.auth = (event, context, callback) => {
   // Verifica o token (basicamente o decodifica). Se existir uma data limite para
   // expiração, também é verificada aqui.
   try {
-    const decoded = jwt.verify(tokenValue, process.env.JWT_SECRET);
-    console.log(`[decoded]: ${decoded}`);
+    const decoded = jwtUtil.verify(tokenValue);
     
     /*
      * Opcionalmente aqui poderia ser verificado se as informações
@@ -48,7 +46,7 @@ module.exports.auth = (event, context, callback) => {
      * estão presentes em uma tabela ou satisfazem outro critério.
      */
     
-    return callback(null, generatePolicy(decoded.principalId, "Allow", event.methodArn));
+    return callback(null, generatePolicy(decoded.email, "Allow", event.methodArn));
   } catch(erro) {
     return callback('Unauthorized');
   }

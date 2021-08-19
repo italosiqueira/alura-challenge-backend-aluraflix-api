@@ -78,7 +78,9 @@ provider:
 #        - dynamodb:DeleteItem
 #        - dynamodb:UpdateItem
 #        - dynamodb:GetItem
-#      Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.VIDEOS_TABLE}'
+#      Resource: 
+#        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.VIDEOS_TABLE}'
+#        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.CATEGORIAS_TABLE}'
 #
 # Variáveis Globais de Ambiente (podem ser acessadas inclusive de dentro do programa)
 # opt:<var> refere-se ao valor de linha de comando --var
@@ -103,6 +105,12 @@ functions:
       - httpApi:
           path: /hello
           method: get
+  login:
+    handler: api/loginHandler.login
+    events:
+      - httpApi:
+          path: /login
+          method: post
   listarCategorias:
     handler: handler.listarCategorias
     events:
