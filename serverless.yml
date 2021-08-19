@@ -60,10 +60,10 @@ provider:
   # Configuração dos Authorizers personalizados da AWS
   httpApi:
     authorizers:
-      customAuthorizer:
+      verifyToken:
         type: request
-        payloadVersion: '1.0'
-        functionName: verify-token
+        functionName: verifyToken
+        name: verifyToken
 
 # you can overwrite defaults here
   stage: dev
@@ -102,9 +102,6 @@ package:
     - '!dev.env.json.example'
 
 functions:
-  # Nossa função que provê a autenticação e validação das requisições, como definido acima
-  verify-token:
-    handler: middlewares/middleware-auth.auth
   hello:
     handler: handler.hello
     events:
@@ -124,49 +121,56 @@ functions:
           path: /categorias
           method: get
           # Utilização do middleware de autenticação/autorização. Isolado dos controladores e rotas
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   obterCategoria:
     handler: handler.obterCategoria
     events:
       - httpApi:
           path: /categorias/{categoriaId}
           method: get
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   listarVideosCategoria:
     handler: handler.listarVideosCategoria
     events:
       - httpApi:
           path: /categorias/{categoriaId}/videos
           method: get
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   criarcategoria:
     handler: handler.criarCategoria
     events:
       - httpApi:
           path: /categorias
           method: post
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   atualizarcategoria:
     handler: handler.atualizarCategoria
     events:
       - httpApi:
           path: /categorias/{categoriaId}
           method: put
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   removerCategoria:
     handler: handler.removerCategoria
     events:
       - httpApi:
           path: /categorias/{categoriaId}
           method: delete
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   listarVideos:
     handler: handler.listarVideos
     events:
       - httpApi:
           path: /videos
           method: get
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   listarVideosPublicos:
     handler: handler.listarVideosPublicos
     events:
@@ -179,28 +183,35 @@ functions:
       - httpApi:
           path: /videos/{videoId}
           method: get
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   criarVideo:
     handler: handler.criarVideo
     events:
       - httpApi:
           path: /videos
           method: post
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   atualizarVideo:
     handler: handler.atualizarVideo
     events:
       - httpApi:
           path: /videos/{videoId}
           method: put
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
   removerVideo:
     handler: handler.removerVideo
     events:
       - httpApi:
           path: /videos/{videoId}
           method: delete
-          authorizer: verify-token
+          authorizer:
+            name: verifyToken
+  
+  verifyToken:
+    handler: middlewares/middleware-auth.auth
 
 # Provisionamento de uma tabela no SGBD AWS DynamoDB. Note a reserva de 
 # recursos, lá embaixo. É mínima por tratar-se de um pequeno projeto de 
