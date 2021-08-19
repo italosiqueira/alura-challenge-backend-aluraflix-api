@@ -51,6 +51,7 @@ custom:
   # Objeto Javascript com o valor da chave simétrica para autenticação das solicitações
   # Armazenado em forma de arquivo JS.
   secrets: ${file(secrets.json)}
+  localEnvironment: ${file(dev.env.json)}
 
 provider:
   name: aws
@@ -69,18 +70,18 @@ provider:
   region: us-east-1
 
 # Role Statements para as Funções Lambda do Usuário IAM (para uso na infra da AWS)
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - dynamodb:Query
-#        - dynamodb:Scan
-#        - dynamodb:PutItem
-#        - dynamodb:DeleteItem
-#        - dynamodb:UpdateItem
-#        - dynamodb:GetItem
-#      Resource: 
-#        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.VIDEOS_TABLE}'
-#        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.CATEGORIAS_TABLE}'
+  iamRoleStatements:
+   - Effect: "Allow"
+     Action:
+       - dynamodb:Query
+       - dynamodb:Scan
+       - dynamodb:PutItem
+       - dynamodb:DeleteItem
+       - dynamodb:UpdateItem
+       - dynamodb:GetItem
+     Resource: 
+       - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.VIDEOS_TABLE}'
+       - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.CATEGORIAS_TABLE}'
 #
 # Variáveis Globais de Ambiente (podem ser acessadas inclusive de dentro do programa)
 # opt:<var> refere-se ao valor de linha de comando --var
@@ -89,6 +90,7 @@ provider:
     VIDEOS_TABLE: 'VIDEOS'
     CATEGORIAS_TABLE: 'CATEGORIAS'
     JWT_SECRET: ${self:custom.secrets.JWT_SECRET}
+    DYNAMOOSE_LOCAL: ${self:custom.localEnvironment.DYNAMOOSE_LOCAL}
 
 # you can add packaging information here
 package:
@@ -96,6 +98,8 @@ package:
     - '!.dynamodb/**'
     - '!.insomnia/**'
     - '!secrets.json.example'
+    - '!dev.env.json'
+    - '!dev.env.json.example'
 
 functions:
   # Nossa função que provê a autenticação e validação das requisições, como definido acima

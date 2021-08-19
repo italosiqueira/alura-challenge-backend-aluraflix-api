@@ -2,8 +2,7 @@
 
 const dynamoose = require("dynamoose");
 
-// TODO: Implementar configuração dinâmica entre ambiente
-const isLocalDynamoDb = () => true;
+const isLocalDynamoDb = () => { return process.env.DYNAMOOSE_LOCAL; };
 
 if (isLocalDynamoDb()) {
     dynamoose.aws.ddb.local();
