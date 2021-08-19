@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: alura-challenge-backend-aluraflix-api
+service: aluraflix-api
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
