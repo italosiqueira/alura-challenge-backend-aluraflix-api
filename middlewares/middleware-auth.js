@@ -22,14 +22,21 @@ const generatePolicy = (principalId, effect, resource) => {
 
 module.exports.auth = (event, context, callback) => {
   
+  let authorizationToken;
+  
   if (!event.authorizationToken) {
-    // Token não enviado
-    return callback('Unauthorized');
+    if (!event.headers['authorization']) {
+      // Token não enviado
+      return callback('Unauthorized');
+    }
+    authorizationToken = event.headers['authorization'];
+  } else {
+    authorizationToken = event.authorizationToken;
   }
-
-  const tokenParts = event.authorizationToken.split(' ');
+  
+  const tokenParts = authorizationToken.split(' ');
   const tokenValue = tokenParts[1];
-
+  
   if (!(tokenParts[0].toLowerCase() === 'bearer' && tokenValue)) {
     // Token correto não encontrado
     return callback('Unauthorized');
@@ -39,7 +46,7 @@ module.exports.auth = (event, context, callback) => {
   // expiração, também é verificada aqui.
   try {
     const decoded = jwtUtil.verify(tokenValue);
-    
+
     /*
      * Opcionalmente aqui poderia ser verificado se as informações
      * presentes em nosso payload existem no sistema, isto é,

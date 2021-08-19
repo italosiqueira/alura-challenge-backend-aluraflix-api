@@ -2,21 +2,20 @@
 
 const querystring = require('querystring');
 const { LoginService } = require("../services/LoginService");
+const base64url = require('base64url');
 
 const loginServiceInstance = new LoginService();
 
 module.exports.login = async (event) => {
     
     try {
+        
         // extrai os dados do corpo da requisição
-        let data = querystring.parse(event.body);
-
+        const body = event.headers['x-forwarded-proto'] === 'https' ? 
+                        base64url.decode(event.body) : event.body;
+        let data = querystring.parse(body);
         const { email, senha } = data;
-
-        console.log(event);
-        console.log(`[email]: ${email}`);
-        console.log(`[senha]: ${senha}`);
-
+        
         const token = loginServiceInstance.login(email, senha);
         
         return {

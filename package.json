@@ -16,6 +16,7 @@
   "license": "AGPL-3.0-or-later",
   "dependencies": {
     "aws-sdk": "^2.953.0",
+    "base64url": "^3.0.1",
     "bcrypt": "^5.0.1",
     "dynamoose": "^2.7.3",
     "jsonwebtoken": "^8.5.1",
