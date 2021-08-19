@@ -1,0 +1,29 @@
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd7173ae6204cd
+type: Request
+parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
+modified: 1628032898534
+created: 1628032898534
+url: "{{ base_url }}/categorias"
+name: Registra uma nova categoria na plataforma.
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "titulo": "string",
+      "cor": "string"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1628032898534
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

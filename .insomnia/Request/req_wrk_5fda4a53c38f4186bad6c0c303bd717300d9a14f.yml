@@ -1,0 +1,29 @@
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd717300d9a14f
+type: Request
+parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
+modified: 1628032898529
+created: 1628032898529
+url: "{{ base_url }}/categorias/{{ id }}"
+name: Atualiza uma categoria registrada na plataforma.
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "titulo": "string",
+      "cor": "string"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1628032898529
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
