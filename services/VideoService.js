@@ -32,7 +32,7 @@ class VideoService {
   }
 
   async listarPorCategoria(categoriaId) {
-    return this.model.queryAll('categoriaId', categoriaId);
+    return this.model.queryAll('categoriaId', categoriaId, true);
   }
 
   async criar(item) {
