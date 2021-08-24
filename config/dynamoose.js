@@ -2,9 +2,12 @@
 
 const dynamoose = require("dynamoose");
 
-const isLocalDynamoDb = () => { return process.env.DYNAMOOSE_LOCAL; };
+// Verifica se o modo de execução é local.
+// Depende do plugins serverless-offline, que adiciona IS_OFFLINE ao 
+// process.env quando executado em modo offline.
+const isOffline = () => process.env.IS_OFFLINE;
 
-if (isLocalDynamoDb()) {
+if (isOffline()) {
     dynamoose.aws.ddb.local();
 } else {
     dynamoose.aws.ddb.set(dynamoose.aws.ddb());
