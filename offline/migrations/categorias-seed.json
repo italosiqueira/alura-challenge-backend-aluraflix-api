@@ -1,52 +1,52 @@
 [
-    {
-      "id": "1",
-      "titulo": "LIVRE",
-      "cor": "#000000"
-    },
-    {
-      "id": "2",
-      "titulo": "Ação",
-      "cor": "blue"
-    },
-    {
-      "id": "3",
-      "titulo": "Suspense",
-      "cor": "yellow"
-    },
-    {
-      "id": "4",
-      "titulo": "Terror",
-      "cor": "red"
-    },
-    {
-      "id": "5",
-      "titulo": "Aventura",
-      "cor": "green"
-    },
-    {
-      "id": "6",
-      "titulo": "Drama",
-      "cor": "orange"
-    },
-    {
-      "id": "7",
-      "titulo": "Fantasia",
-      "cor": "cyan"
-    },
-    {
-      "id": "8",
-      "titulo": "Musical",
-      "cor": "lime"
-    },
-    {
-      "id": "9",
-      "titulo": "Romance",
-      "cor": "Crimson"
-    },
-    {
-      "id": "10",
-      "titulo": "Educacional",
-      "cor": "FloralWhite"
-    }
+  {
+    "id": "1",
+    "titulo": "LIVRE",
+    "cor": "#000000"
+  },
+  {
+    "id": "2",
+    "titulo": "Educacional",
+    "cor": "FloralWhite"
+  },
+  {
+    "id": "3",
+    "titulo": "Ação",
+    "cor": "blue"
+  },
+  {
+    "id": "4",
+    "titulo": "Suspense",
+    "cor": "yellow"
+  },
+  {
+    "id": "5",
+    "titulo": "Terror",
+    "cor": "red"
+  },
+  {
+    "id": "6",
+    "titulo": "Aventura",
+    "cor": "green"
+  },
+  {
+    "id": "7",
+    "titulo": "Drama",
+    "cor": "orange"
+  },
+  {
+    "id": "8",
+    "titulo": "Fantasia",
+    "cor": "cyan"
+  },
+  {
+    "id": "9",
+    "titulo": "Musical",
+    "cor": "lime"
+  },
+  {
+    "id": "10",
+    "titulo": "Romance",
+    "cor": "Crimson"
+  }
 ]
