@@ -83,7 +83,6 @@ provider:
     VIDEOS_TABLE: 'VIDEOS'
     CATEGORIAS_TABLE: 'CATEGORIAS'
     JWT_SECRET: ${self:custom.secrets.JWT_SECRET}
-    DYNAMOOSE_LOCAL: ${self:custom.localEnvironment.DYNAMOOSE_LOCAL}
 
 # you can add packaging information here
 package:
