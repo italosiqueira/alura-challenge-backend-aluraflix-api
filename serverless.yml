@@ -57,13 +57,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
-  # Configuração dos Authorizers personalizados da AWS
-  httpApi:
-    authorizers:
-      verifyToken:
-        type: request
-        functionName: verifyToken
-        name: verifyToken
 
 # you can overwrite defaults here
   stage: dev
@@ -105,110 +98,99 @@ functions:
   hello:
     handler: handler.hello
     events:
-      - httpApi:
-          path: /hello
-          method: get
+      - http:
+          path: hello
+          method: GET
   login:
     handler: api/loginHandler.login
     events:
-      - httpApi:
-          path: /login
-          method: post
+      - http:
+          path: login
+          method: POST
   listarCategorias:
     handler: handler.listarCategorias
     events:
-      - httpApi:
-          path: /categorias
-          method: get
+      - http:
+          path: categorias
+          method: GET
           # Utilização do middleware de autenticação/autorização. Isolado dos controladores e rotas
-          authorizer:
-            name: verifyToken
+          authorizer: verifyToken
   obterCategoria:
     handler: handler.obterCategoria
     events:
-      - httpApi:
-          path: /categorias/{categoriaId}
-          method: get
-          authorizer:
-            name: verifyToken
+      - http:
+          path: categorias/{categoriaId}
+          method: GET
+          authorizer: verifyToken
   listarVideosCategoria:
     handler: handler.listarVideosCategoria
     events:
-      - httpApi:
-          path: /categorias/{categoriaId}/videos
-          method: get
-          authorizer:
-            name: verifyToken
+      - http:
+          path: categorias/{categoriaId}/videos
+          method: GET
+          authorizer: verifyToken
   criarcategoria:
     handler: handler.criarCategoria
     events:
-      - httpApi:
-          path: /categorias
-          method: post
-          authorizer:
-            name: verifyToken
+      - http:
+          path: categorias
+          method: POST
+          authorizer: verifyToken
   atualizarcategoria:
     handler: handler.atualizarCategoria
     events:
-      - httpApi:
-          path: /categorias/{categoriaId}
-          method: put
-          authorizer:
-            name: verifyToken
+      - http:
+          path: categorias/{categoriaId}
+          method: PUT
+          authorizer: verifyToken
   removerCategoria:
     handler: handler.removerCategoria
     events:
-      - httpApi:
-          path: /categorias/{categoriaId}
-          method: delete
-          authorizer:
-            name: verifyToken
+      - http:
+          path: categorias/{categoriaId}
+          method: DELETE
+          authorizer: verifyToken
   listarVideos:
     handler: handler.listarVideos
     events:
-      - httpApi:
-          path: /videos
-          method: get
-          authorizer:
-            name: verifyToken
+      - http:
+          path: videos
+          method: GET
+          authorizer: verifyToken
   listarVideosPublicos:
     handler: handler.listarVideosPublicos
     events:
-      - httpApi:
-          path: /videos/free
-          method: get
+      - http:
+          path: videos/free
+          method: GET
   obterVideo:
     handler: handler.obterVideo
     events:
-      - httpApi:
-          path: /videos/{videoId}
-          method: get
-          authorizer:
-            name: verifyToken
+      - http:
+          path: videos/{videoId}
+          method: GET
+          authorizer: verifyToken
   criarVideo:
     handler: handler.criarVideo
     events:
-      - httpApi:
-          path: /videos
-          method: post
-          authorizer:
-            name: verifyToken
+      - http:
+          path: videos
+          method: POST
+          authorizer: verifyToken
   atualizarVideo:
     handler: handler.atualizarVideo
     events:
-      - httpApi:
-          path: /videos/{videoId}
-          method: put
-          authorizer:
-            name: verifyToken
+      - http:
+          path: videos/{videoId}
+          method: PUT
+          authorizer: verifyToken
   removerVideo:
     handler: handler.removerVideo
     events:
-      - httpApi:
-          path: /videos/{videoId}
-          method: delete
-          authorizer:
-            name: verifyToken
+      - http:
+          path: videos/{videoId}
+          method: DELETE
+          authorizer: verifyToken
   
   verifyToken:
     handler: middlewares/middleware-auth.auth
