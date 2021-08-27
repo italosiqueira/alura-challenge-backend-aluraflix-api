@@ -25,12 +25,15 @@ module.exports.auth = (event, context, callback) => {
   let authorizationToken;
   
   if (!event.authorizationToken) {
-    if (!event.headers['authorization']) {
+    if (!event.headers || !event.headers['authorization']) {
       // Token não enviado
+      console.log('HEADER authorization and PROPERTY authorizationToken not found!');
       return callback('Unauthorized');
     }
+    console.log(`Found HEADER authorization - type ${event.type}.`)
     authorizationToken = event.headers['authorization'];
   } else {
+    console.log(`Found PROPERTY authorizationToken - type ${event.type}.`)
     authorizationToken = event.authorizationToken;
   }
   

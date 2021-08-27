@@ -10,11 +10,11 @@ class LoginService {
             let messages = [];
             
             if (!email) {
-                messages.push('O campo \"email\" é obrigatório.');
+                messages.push('O campo "email" é obrigatório.');
             }
 
             if (!senha) {
-                messages.push('O campo \"senha\" é obrigatório.');
+                messages.push('O campo "senha" é obrigatório.');
             }
             
             throw({ 
