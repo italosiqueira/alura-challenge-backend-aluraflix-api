@@ -1,17 +1,20 @@
-_id: req_wrk_5fda4a53c38f4186bad6c0c303bd7173ebd36e5b
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd7173238e2260
 type: Request
-parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
-modified: 1627304742402
-created: 1627257421959
-url: "{{ base_url }}/videos/{{ id }}"
+parentId: fld_wrk_5fda4a53c38f4186bad6c0c303bd7173ffbaf58f
+modified: 1630386332949
+created: 1630300476112
+url: "{{ base_url }}/videos/{{ idVideo }}"
 name: Remove um vídeo registrado na plataforma.
 description: ""
 method: DELETE
 body: {}
 parameters: []
 headers: []
-authentication: {}
-metaSortKey: -1627205859735.5
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1630300476112
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

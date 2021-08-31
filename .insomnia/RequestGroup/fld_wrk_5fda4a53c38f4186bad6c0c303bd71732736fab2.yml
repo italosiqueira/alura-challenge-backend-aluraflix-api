@@ -1,0 +1,10 @@
+_id: fld_wrk_5fda4a53c38f4186bad6c0c303bd71732736fab2
+type: RequestGroup
+parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
+modified: 1630302119115
+created: 1630302119115
+name: login
+description: Operações de autenticação e autorização.
+environment: {}
+environmentPropertyOrder: null
+metaSortKey: -1630302119115

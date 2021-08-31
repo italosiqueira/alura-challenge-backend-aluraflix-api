@@ -1,7 +1,7 @@
 _id: spc_3cf0cba384d049b8b321778afd881dab
 type: ApiSpec
 parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
-modified: 1628123038397
+modified: 1630393614764
 created: 1627190140342
 fileName: AluraFlix API
 contents: >-
@@ -16,26 +16,115 @@ contents: >-
     license:
       name: GPL 3.0
       url: https://opensource.org/licenses/GPL-3.0
-  tag:
+  tags:
     - name: video
       description: Todas as informações sobre vídeos registrados na plataforma.
     - name: categoria
       description: Categorias registradas na plataforma para classificar os vídeos.
+    - name: login
+      description: Operações de autenticação e autorização.
   servers:
-    - url: http://localhost:{port}
+    - url: http://localhost:{port}/{stage}
       description: Local test server
       variables:
         port:
-          default: 3001
+          default: "3001"
+        stage:
+          default: "dev"
+  components:
+    parameters:
+      pagina:
+        name: page
+        in: query
+        required: false
+        description: Número da página desejada. Ativa a paginação quando presente.
+        schema:
+          type: "integer"
+      titulo:
+        name: titulo
+        in: query
+        required: false
+        description: Critério de busca por título.
+        schema:
+          type: "string"
+    securitySchemes:
+      aluraflix_auth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+    responses:
+      unauthorized:
+        description: Token inválido ou não informado
+        content:
+          application/json:
+            schema:
+              type: object
+              minimum: 1
+              maximum: 1
+              properties:
+                statusCode:
+                  type: integer
+                error:
+                  type: string
+                message:
+                  type: string
   paths:
+    /login:
+      post:
+        tags:
+          - login
+        summary: Autentica por meio da geração de um token único.
+        operationId: login
+        parameters:
+          - name: email
+            in: query
+            required: true
+            description: E-Mail do usuário.
+            schema:
+              type: "string"
+          - name: senha
+            in: query
+            required: true
+            description: Senha do usuário.
+            schema:
+              type: "string"
+        responses:
+          "204":
+            description: Usuário autenticado com sucesso e token gerado.
+            headers:
+              Authorization:
+                description: O *token* de autorização gerado pelo sistema para o cliente.
+                schema:
+                  type: string
+              Access-Control-Allow-Credentials:
+                description: Necessário para *cookies*, *authorization headers* com HTTPS.
+                schema:
+                  type: boolean
+          "400":
+            description: Pelo menos um atributo obrigatório está ausente.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    error:
+                      type: string
+                      description: Categoria interna do erro. Possivelmente *MissingParameterException*.
+                    message:
+                      type: string
     /videos:
       get:
         tags:
           - video
         summary: Busca os vídeos registrados na plataforma.
-        description: ""
         operationId: listarVideos
-        requestBody:
+        security:
+          - aluraflix_auth: []
+        parameters:
+          - $ref: "#/components/parameters/pagina"
+          - $ref: "#/components/parameters/titulo"
         responses:
           "200":
             description: Sucesso
@@ -56,14 +145,18 @@ contents: >-
                         type: string
                       url:
                         type: string
+          "401":
+            $ref: "#/components/responses/unauthorized"
       post:
         tags:
           - video
         summary: Registra um novo vídeo na plataforma.
         description: ""
         operationId: criarVideo
+        security:
+          - aluraflix_auth: []
         requestBody:
-          required: true;
+          required: true
           content:
             application/json:
               schema:
@@ -113,17 +206,24 @@ contents: >-
                       description: Categoria interna do erro.
                     message:
                       type: string
-    /videos/{id}:
+          "401":
+            $ref: "#/components/responses/unauthorized"
+    /videos/{idVideo}:
+      parameters:
+        - name: idVideo
+          in: path
+          required: true
+          description: Identificador único do vídeo.
+          schema:
+            type: "string"
       get:
         tags:
           - video
         summary: Recupera um vídeo registrado na plataforma.
-        description:
-        parameters:
-        - name: id
-          in: path
-          required: true
-          description: Identificador único do vídeo a ser consultado.
+        description: ""
+        operationId: obterVideo
+        security:
+          - aluraflix_auth: []
         responses:
           "200":
             description: Vídeo encontrado com sucesso.
@@ -144,23 +244,35 @@ contents: >-
                       type: string
                     url:
                       type: string
+          "401":
+            $ref: "#/components/responses/unauthorized"
+          "404":
+            description: ID do vídeo não encontrado.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    error:
+                      type: string
+                      description: Mensagem informativa.
       put:
         tags:
           - video
         summary: Atualiza um vídeo registrado na plataforma.
-        description:
-        parameters:
-        - name: id
-          in: path
-          required: true
-          description: Identificador único do vídeo a ser atualizado.
+        description: ""
+        operationId: atualizarVideo
+        security:
+          - aluraflix_auth: []
         requestBody:
           required: true
           content:
             application/json:
               schema:
                 type: object
-                miminum: 1
+                minimum: 1
                 maximum: 1
                 properties:
                   categoriaId:
@@ -205,6 +317,8 @@ contents: >-
                       description: Categoria interna do erro. Possivelmente *MissingParameterException*.
                     message:
                       type: string
+          "401":
+            $ref: "#/components/responses/unauthorized"
           "404":
             description: ID do vídeo não encontrado.
             content:
@@ -223,12 +337,10 @@ contents: >-
         tags:
           - video
         summary: Remove um vídeo registrado na plataforma.
-        description:
-        parameters:
-        - name: id
-          in: path
-          required: true
-          description: Identificador único do vídeo a ser removido.
+        description: ""
+        operationId: removerVideo
+        security:
+          - aluraflix_auth: []
         responses:
           "200":
             description: Vídeo removido com sucesso.
@@ -239,6 +351,8 @@ contents: >-
                   minimum: 1
                   maximum: 1
                   description: Simples mensagem informativa
+          "401":
+            $ref: "#/components/responses/unauthorized"
           "404":
             description: ID do vídeo não encontrado.
             content:
@@ -253,6 +367,32 @@ contents: >-
                       description: Categoria interna do erro. Possivelmente *ItemNotFoundException*.
                     message:
                       type: string
+    /videos/free:
+      get:
+        tags:
+          - video
+        summary: Busca uma quantidade limitada de vídeos sem necessidade de autenticação.
+        operationId: listarVideosFree
+        responses:
+          "200":
+            description: Sucesso
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      categoriaId:
+                        type: string
+                      titulo:
+                        type: string
+                      descricao:
+                        type: string
+                      url:
+                        type: string
     /categorias:
       get:
         tags:
@@ -260,18 +400,25 @@ contents: >-
         summary: Busca as categorias registradas na plataforma.
         description: ""
         operationId: listarCategorias
-        requestBody:
+        security:
+          - aluraflix_auth: []
+        parameters:
+          - $ref: "#/components/parameters/pagina"
         responses:
           "200":
             description: Sucesso
+          "401":
+            $ref: "#/components/responses/unauthorized"
       post:
         tags:
           - categoria
         summary: Registra uma nova categoria na plataforma.
         description: ""
         operationId: criarCategoria
+        security:
+          - aluraflix_auth: []
         requestBody:
-          required: true;
+          required: true
           content:
             application/json:
               schema:
@@ -313,17 +460,24 @@ contents: >-
                       description: Categoria interna do erro.
                     message:
                       type: string
-    /categorias/{id}:
+          "401":
+            $ref: "#/components/responses/unauthorized"
+    /categorias/{idCategoria}:
+      parameters:
+        - name: idCategoria
+          in: path
+          required: true
+          description: Identificador único da categoria.
+          schema:
+            type: "string"
       get:
         tags:
           - categoria
         summary: Recupera uma categoria registrada na plataforma.
-        description:
-        parameters:
-        - name: id
-          in: path
-          required: true
-          description: Identificador único da categoria a ser consultada.
+        description: ""
+        operationId: obterCategoria
+        security:
+          - aluraflix_auth: []
         responses:
           "200":
             description: Categoria encontrada.
@@ -340,24 +494,34 @@ contents: >-
                       type: string
                     cor:
                       type: string
+          "401":
+            $ref: "#/components/responses/unauthorized"
+          "404":
+            description: ID da categoria não encontrado.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  minimum: 1
+                  maximum: 1
+                  properties:
+                    error:
+                      type: string
+                      description: Mensagem informativa.
       put:
         tags:
           - categoria
         summary: Atualiza uma categoria registrada na plataforma.
-        description:
-        parameters:
-        - name: id
-          in: path
-          required: true
-          description: Identificador único da categoria a ser atualizada.
+        description: ""
+        operationId: atualizarCategoria
+        security:
+          - aluraflix_auth: []
         requestBody:
           required: true
           content:
             application/json:
               schema:
                 type: object
-                miminum: 1
-                maximum: 1
                 properties:
                   titulo:
                     type: string
@@ -393,6 +557,8 @@ contents: >-
                       description: Categoria interna do erro. Possivelmente *MissingParameterException*.
                     message:
                       type: string
+          "401":
+            $ref: "#/components/responses/unauthorized"
           "404":
             description: ID da categoria não encontrado.
             content:
@@ -411,12 +577,10 @@ contents: >-
         tags:
           - categoria
         summary: Remove uma categoria registrada na plataforma.
-        description:
-        parameters:
-        - name: id
-          in: path
-          required: true
-          description: Identificador único da categoria a ser removida.
+        description: ""
+        operationId: removerCategoria
+        security:
+          - aluraflix_auth: []
         responses:
           "200":
             description: Categoria removida com sucesso.
@@ -427,6 +591,8 @@ contents: >-
                   minimum: 1
                   maximum: 1
                   description: Simples mensagem informativa
+          "401":
+            $ref: "#/components/responses/unauthorized"
           "404":
             description: ID da categoria não encontrado.
             content:
@@ -441,17 +607,22 @@ contents: >-
                       description: Categoria interna do erro. Possivelmente *ItemNotFoundException*.
                     message:
                       type: string
-    /categorias/{id}/videos:
+    /categorias/{idCategoria}/videos:
+      parameters:
+        - name: idCategoria
+          in: path
+          required: true
+          description: Identificador da categoria.
+          schema:
+            type: "string"
       get:
         tags:
           - categoria
         summary: Recupera os vídeos relacionados à categoria registrada na plataforma.
-        description:
-        parameters:
-        - name: id
-          in: path
-          required: true
-          description: Identificador único da categoria a ser consultada.
+        description: ""
+        operationId: listarVideosCategoria
+        security:
+          - aluraflix_auth: []
         responses:
           "200":
             description: Sucesso.
@@ -472,4 +643,6 @@ contents: >-
                         type: string
                       url:
                         type: string
+          "401":
+            $ref: "#/components/responses/unauthorized"
 contentType: yaml

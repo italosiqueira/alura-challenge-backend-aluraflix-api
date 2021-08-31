@@ -1,7 +1,7 @@
 _id: req_wrk_5fda4a53c38f4186bad6c0c303bd71736bd307d1
 type: Request
-parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
-modified: 1627304746592
+parentId: fld_wrk_5fda4a53c38f4186bad6c0c303bd7173ffbaf58f
+modified: 1630386172769
 created: 1627221312023
 url: "{{ base_url }}/videos"
 name: Registra um novo vídeo na plataforma.
@@ -20,8 +20,11 @@ headers:
   - name: Content-Type
     value: application/json
     id: pair_179d52a27ae64c9f825802f0b0eed9d1
-authentication: {}
-metaSortKey: -1627235085659.5
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1630300476115
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

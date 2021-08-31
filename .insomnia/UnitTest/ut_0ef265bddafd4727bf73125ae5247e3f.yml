@@ -1,0 +1,17 @@
+_id: ut_0ef265bddafd4727bf73125ae5247e3f
+type: UnitTest
+parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
+modified: 1630393866591
+created: 1630393729398
+requestId: req_44f19269489d44d9a661c7e04805bef1
+name: Login Returns 400
+code: |-
+  const response = await insomnia.send();
+  expect(response.status).to.equal(400);
+
+  const headers = response.headers;
+  expect(headers).to.not.have.property('authorization');
+
+  const item = JSON.parse(response.data);
+  expect(item).to.have.property('error');
+  expect(item.error).to.equal('MissingParameterException');

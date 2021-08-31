@@ -1,0 +1,14 @@
+_id: ut_e43c847feee44b1fac0b9db96775fee7
+type: UnitTest
+parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
+modified: 1630393551717
+created: 1630392157008
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd71732736fab2
+name: Login Returns 204
+code: |-
+  const response = await insomnia.send();
+  expect(response.status).to.equal(204);
+
+  const headers = response.headers;
+  expect(headers).to.have.property('authorization');
+  expect(headers.authorization).to.have.lengthOf.at.least(1);

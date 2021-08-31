@@ -1,26 +1,21 @@
-_id: req_wrk_5fda4a53c38f4186bad6c0c303bd717333257891
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd71738b280a64
 type: Request
 parentId: fld_wrk_5fda4a53c38f4186bad6c0c303bd7173ffbaf58f
-modified: 1630386055733
-created: 1627221312028
-url: "{{ base_url }}/videos"
-name: Busca os vídeos registrados na plataforma.
+modified: 1630386503846
+created: 1630300476116
+url: "{{ base_url }}/videos/{{ idVideo }}"
+name: Recupera um vídeo registrado na plataforma.
 description: ""
 method: GET
 body: {}
-parameters:
-  - name: page
-    disabled: true
-    value: "0"
-  - name: titulo
-    disabled: true
-    value: string
+parameters: []
 headers: []
 authentication:
   type: bearer
   token: "{{bearerToken}}"
   prefix: ""
-metaSortKey: -1630300476166
+  disabled: false
+metaSortKey: -1630300476116
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

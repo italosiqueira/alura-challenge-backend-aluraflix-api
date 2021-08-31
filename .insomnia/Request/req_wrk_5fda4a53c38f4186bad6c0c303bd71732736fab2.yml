@@ -1,0 +1,40 @@
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd71732736fab2
+type: Request
+parentId: fld_wrk_5fda4a53c38f4186bad6c0c303bd71732736fab2
+modified: 1630392519063
+created: 1630302119109
+url: "{{ base_url }}/login"
+name: Autentica por meio da geração de um token único.
+description: ""
+method: POST
+body:
+  mimeType: application/x-www-form-urlencoded
+  params:
+    - id: pair_e56a6155417c46f9a94fd9aa3c608fec
+      name: email
+      value: john.doe@incognito.com
+      description: ""
+    - id: pair_9c86f1b050514ce1850d361fe5f54af5
+      name: senha
+      value: "123456"
+      description: ""
+parameters:
+  - name: email
+    disabled: false
+    value: string
+  - name: senha
+    disabled: false
+    value: string
+headers:
+  - name: Content-Type
+    value: application/x-www-form-urlencoded
+    id: pair_b080769f4aee4850b03777ff1f4cd880
+authentication: {}
+metaSortKey: -1630302119109
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

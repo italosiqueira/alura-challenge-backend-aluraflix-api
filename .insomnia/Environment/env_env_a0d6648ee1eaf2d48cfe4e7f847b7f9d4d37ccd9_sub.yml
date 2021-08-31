@@ -1,20 +1,24 @@
 _id: env_env_a0d6648ee1eaf2d48cfe4e7f847b7f9d4d37ccd9_sub
 type: Environment
 parentId: env_a0d6648ee1eaf2d48cfe4e7f847b7f9d4d37ccd9
-modified: 1628123353468
+modified: 1630385885866
 created: 1627221312031
 name: OpenAPI env
 data:
   scheme: http
-  base_path: ""
+  base_path: /dev
   host: localhost:3001
-  id: 4bSBOtWLUoTq8BjhbEDu0
+  bearerToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml0YWxvQGFsdXJhZmxpeC5jb20iLCJzZW5oYSI6IjEyMzQ1NiIsImlhdCI6MTYzMDA2NjA3NX0.wLHEBDOCTMtBWL4vOOTfk3bIHGuPG8b6XkiqKy4AOEQ
+  idVideo: "1"
+  idCategoria: "2"
 dataPropertyOrder:
   "&":
     - scheme
     - base_path
     - host
-    - id
+    - idVideo
+    - idCategoria
+    - bearerToken
 color: null
 isPrivate: false
 metaSortKey: 1627221312031

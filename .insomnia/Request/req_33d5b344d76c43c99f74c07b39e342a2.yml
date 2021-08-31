@@ -1,10 +1,10 @@
-_id: req_wrk_5fda4a53c38f4186bad6c0c303bd717333257891
+_id: req_33d5b344d76c43c99f74c07b39e342a2
 type: Request
 parentId: fld_wrk_5fda4a53c38f4186bad6c0c303bd7173ffbaf58f
-modified: 1630386055733
-created: 1627221312028
-url: "{{ base_url }}/videos"
-name: Busca os vídeos registrados na plataforma.
+modified: 1630391489195
+created: 1630391478772
+url: "{{ base_url }}/videos?titulo=SQL"
+name: Busca os vídeos registrados na plataforma por título.
 description: ""
 method: GET
 body: {}
@@ -12,15 +12,17 @@ parameters:
   - name: page
     disabled: true
     value: "0"
+    id: pair_5e86b387e2c845e09f8dd96ccdd67bfc
   - name: titulo
     disabled: true
     value: string
+    id: pair_9879ed2d89d54f9cb6a7eef9331f3061
 headers: []
 authentication:
   type: bearer
   token: "{{bearerToken}}"
   prefix: ""
-metaSortKey: -1630300476166
+metaSortKey: -1630300476160
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

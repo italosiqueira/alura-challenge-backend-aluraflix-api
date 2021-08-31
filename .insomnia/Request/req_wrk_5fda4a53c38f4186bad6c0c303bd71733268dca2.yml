@@ -1,17 +1,20 @@
-_id: req_wrk_5fda4a53c38f4186bad6c0c303bd71739ccffb88
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd71733268dca2
 type: Request
-parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
-modified: 1628032898525
-created: 1628032898525
-url: "{{ base_url }}/categorias/{{ id }}"
+parentId: fld_wrk_5fda4a53c38f4186bad6c0c303bd71730276afa6
+modified: 1630386383660
+created: 1630300476099
+url: "{{ base_url }}/categorias/{{ idCategoria }}"
 name: Remove uma categoria registrada na plataforma.
 description: ""
 method: DELETE
 body: {}
 parameters: []
 headers: []
-authentication: {}
-metaSortKey: -1628032898525
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1630300476099
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

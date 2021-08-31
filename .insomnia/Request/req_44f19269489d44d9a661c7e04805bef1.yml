@@ -1,0 +1,43 @@
+_id: req_44f19269489d44d9a661c7e04805bef1
+type: Request
+parentId: fld_wrk_5fda4a53c38f4186bad6c0c303bd71732736fab2
+modified: 1630393685434
+created: 1630393673066
+url: "{{ base_url }}/login"
+name: Autenticação sem parâmetro obrigatório Senha Returns 400
+description: ""
+method: POST
+body:
+  mimeType: application/x-www-form-urlencoded
+  params:
+    - id: pair_e56a6155417c46f9a94fd9aa3c608fec
+      name: email
+      value: john.doe@incognito.com
+      description: ""
+    - id: pair_9c86f1b050514ce1850d361fe5f54af5
+      name: senha
+      value: "123456"
+      description: ""
+      disabled: true
+parameters:
+  - name: email
+    disabled: false
+    value: string
+    id: pair_f1ea109ff4624e448f78b840717af398
+  - name: senha
+    disabled: false
+    value: string
+    id: pair_2c36b104c5934c96ad948bcfbec06c04
+headers:
+  - name: Content-Type
+    value: application/x-www-form-urlencoded
+    id: pair_b080769f4aee4850b03777ff1f4cd880
+authentication: {}
+metaSortKey: -1630301297637.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

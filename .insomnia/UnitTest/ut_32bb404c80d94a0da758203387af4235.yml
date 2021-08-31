@@ -1,0 +1,14 @@
+_id: ut_32bb404c80d94a0da758203387af4235
+type: UnitTest
+parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
+modified: 1630387036887
+created: 1630386900952
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd717320a46ecd
+name: Consulta todas as categorias
+code: |-
+  const response = await insomnia.send();
+  const body = JSON.parse(response.data);
+
+  expect(response.status).to.equal(200);
+  expect(body).to.be.an('array');
+  expect(body).to.have.lengthOf.at.least(1);

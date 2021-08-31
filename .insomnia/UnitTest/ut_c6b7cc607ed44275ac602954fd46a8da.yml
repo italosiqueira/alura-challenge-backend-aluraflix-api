@@ -1,10 +1,10 @@
-_id: ut_947333da9b9c4043bdbb05579912f677
+_id: ut_c6b7cc607ed44275ac602954fd46a8da
 type: UnitTest
 parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
-modified: 1630387244716
-created: 1627194198629
-requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd7173238e2260
-name: Remove Vídeo ID existe
+modified: 1630387282972
+created: 1630387263806
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd71733268dca2
+name: Remove Categoria ID existe
 code: |-
   const response = await insomnia.send();
   expect(response.status).to.equal(200);

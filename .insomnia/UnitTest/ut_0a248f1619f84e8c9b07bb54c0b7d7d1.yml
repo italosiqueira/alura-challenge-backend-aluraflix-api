@@ -1,14 +1,13 @@
-_id: ut_da56a32dc2784f21bb6e18c25ffe6a88
+_id: ut_0a248f1619f84e8c9b07bb54c0b7d7d1
 type: UnitTest
 parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
-modified: 1630386126676
-created: 1627192057287
-requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd71738b280a64
-name: Consulta Vídeo ID registrado
+modified: 1630387104169
+created: 1630387077649
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd717330edef0e
+name: Consulta Categoria ID registrado
 code: |-
   const response = await insomnia.send();
   const item = JSON.parse(response.data);
 
   expect(response.status).to.equal(200);
   expect(item).to.have.property('id');
-  expect(item.id).to.equal('1');

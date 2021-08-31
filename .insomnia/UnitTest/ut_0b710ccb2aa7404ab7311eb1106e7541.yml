@@ -1,10 +1,10 @@
 _id: ut_0b710ccb2aa7404ab7311eb1106e7541
 type: UnitTest
 parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
-modified: 1628123431085
+modified: 1630386478626
 created: 1627193045075
-requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd71735bc1a22b
-name: Atualiza vídeo completo com identificador válido
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd7173bcb05b3d
+name: Atualiza vídeo completo ID registrado
 code: >-
   const response = await insomnia.send();
 
@@ -13,4 +13,4 @@ code: >-
 
   const item = JSON.parse(response.data);
 
-  expect(item).to.have.property('titulo', 'Conheça o canal da Alura! Nova edição!');
+  expect(item).to.have.property('titulo', 'Conheça o canal da Alura dos irmãos Silveira!');

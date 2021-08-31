@@ -1,0 +1,13 @@
+_id: ut_35fd43d19c4749b0ae2fd2610dcee9b6
+type: UnitTest
+parentId: uts_f02bed6414c64e0a833c5d6c74a12c02
+modified: 1630387211751
+created: 1630387162805
+requestId: req_wrk_5fda4a53c38f4186bad6c0c303bd7173e41e716f
+name: Atualiza categoria completa
+code: |-
+  const response = await insomnia.send();
+  expect(response.status).to.equal(200);
+
+  const item = JSON.parse(response.data);
+  expect(item).to.have.property('id');

@@ -1,0 +1,10 @@
+_id: fld_wrk_5fda4a53c38f4186bad6c0c303bd7173ffbaf58f
+type: RequestGroup
+parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
+modified: 1630300476124
+created: 1630300476124
+name: video
+description: Todas as informações sobre vídeos registrados na plataforma.
+environment: {}
+environmentPropertyOrder: null
+metaSortKey: -1630300476124

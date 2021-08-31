@@ -1,9 +1,9 @@
-_id: req_wrk_5fda4a53c38f4186bad6c0c303bd717300d9a14f
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd7173e41e716f
 type: Request
-parentId: wrk_5fda4a53c38f4186bad6c0c303bd7173
-modified: 1628032898529
-created: 1628032898529
-url: "{{ base_url }}/categorias/{{ id }}"
+parentId: fld_wrk_5fda4a53c38f4186bad6c0c303bd71730276afa6
+modified: 1630386373441
+created: 1630300476102
+url: "{{ base_url }}/categorias/{{ idCategoria }}"
 name: Atualiza uma categoria registrada na plataforma.
 description: ""
 method: PUT
@@ -11,15 +11,19 @@ body:
   mimeType: application/json
   text: |-
     {
-      "titulo": "string",
-      "cor": "string"
+    	"titulo": "Educacional",
+    	"cor": "purple"
     }
 parameters: []
 headers:
   - name: Content-Type
     value: application/json
-authentication: {}
-metaSortKey: -1628032898529
+    id: pair_14381aee60ca4c448a08688511534366
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1630300476102
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

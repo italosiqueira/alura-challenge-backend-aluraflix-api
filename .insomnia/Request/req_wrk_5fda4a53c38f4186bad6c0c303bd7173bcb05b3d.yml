@@ -1,0 +1,35 @@
+_id: req_wrk_5fda4a53c38f4186bad6c0c303bd7173bcb05b3d
+type: Request
+parentId: fld_wrk_5fda4a53c38f4186bad6c0c303bd7173ffbaf58f
+modified: 1630386313278
+created: 1630300476114
+url: "{{ base_url }}/videos/{{ idVideo }}"
+name: Atualiza um vídeo registrado na plataforma.
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: >-2
+      {
+        "categoriaId": "1",
+        "titulo": "Conheça o canal da Alura dos irmãos Silveira!",
+        "descricao": "Aqui você vai acompanhar conteúdos de Tecnologia, Design e UX tanto em aulas curtas e práticas, quanto em webséries, como o Hipsters Ponto Tube e bate-papos com referências da área.",
+        "url": "https://www.youtube.com/watch?v=94yuIVdoevc"
+      }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_d9a8f005699543b0b3b6c1c55687b29c
+authentication:
+  type: bearer
+  token: "{{bearerToken}}"
+  prefix: ""
+metaSortKey: -1630300476114
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
