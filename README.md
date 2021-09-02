@@ -54,9 +54,52 @@ Finalmente, para subir localmente nossa API:
 sls offline start
 ```
 
+# Deploy
+
+Como mencionado no começo do README, este projeto foi feito tendo em mente o *deploy* da nuvem da Amazon, a [AWS](https://aws.amazon.com/pt/). Supondo que o ambiente foi configurado de acordo com as instruções aqui presentes, basta executar o seguinte comando para disponibilizar a sua API na AWS:
+
+```bash
+sls deploy --stage release
+```
+
+A sua API será disponibilizada no caminho:
+
+```
+https://<aws-id>.execute-api.<region>.amazonaws.com/<stage>
+```
+
+onde
+
+- \<aws-id\>: identificador atribuído pela AWS ao seu API Gateway;
+- \<region\>: a região da AWS indicada por você, ou conforme definida nas configurações do projeto (_serverless.yml_);
+- \<stage\>: o estágio do seu projeto para o qual vocês deseja implantar, indicada por você ou conforme definida nas configurações do projeto (_serverless.yml_).
+
+Você pode perguntar ao _framework_ se há um _release_ já disponibilizado com o seguinte comando:
+
+```bash
+sls info --stage release
+```
+
+## Remoto vs. Local
+
+Encontrei as seguintes diferenças ao realizar o _deploy_ entre os serviços local e remoto:
+
+1. **query string**: como a API é disponibilizada com o protocolo seguro HTTPS, ao enviarmos nossos parâmetros codificados via URL (ver [loginHandler.js](api/loginHandler.js)), devemos decodificar as informações via _base64url_. Em um ambiente não seguro, esta decodificação não é necessária. Deste modo, verificamos o protocolo da requisição via cabeçalho _x-forwarded-proto_;
+2. **cabeçalho `Authorization`** nas reposta: o API Gateway impõe certas restrições e limitações ao lidar com métodos com a integração do Lambda (utilizado aqui) ou a integração HTTP. Dentre estas limitações, está o cabeçalho de resposta `Authorization`, utilizado para retornar o _token_ JWT ao cliente, sendo remapeado para `x-amzn-remapped-authorization`. Este problema é do interesse de qualquer _front-end_ que deseje consumir nossa API. Não consegui encontrar uma solução adequada para esta questão. Maiores informações podem ser encontradas [aqui](https://docs.aws.amazon.com/pt_br/apigateway/latest/developerguide/api-gateway-known-issues.html).
+
 # Testes
 
-Os testes da API Rest podem ser feitos pelo utilitário de linha de comando `curl` ou por um aplicativo de cliente de APIs. Optamos por esta última opção, utilizando o [Insomnia](https://insomnia.rest/).
+Os testes da API Rest podem ser feitos pelo utilitário de linha de comando `curl` ou por um aplicativo de cliente de APIs. Optamos por esta última opção, utilizando o [Insomnia](https://insomnia.rest/). Os projeto do _Insomnia_ está configurado somente para testes de integração locais.
+
+# Melhorias
+
+Algumas funcionalidades ou atividades ficaram de fora:
+
+1. testes unitários: não tive tempo de estudar um _framework_ de testes unitários (em compensação, estudamos testes de integração na plataforma _Insomnia_ e o padrão _OpenAPI_);
+2. utilizar os métodos `query` do _DynamoDB_: é necessário definir adequadamente nossos _schemas_ no _framework_ de modelagem _Dynamoose_ para utilizar o método de consulta `query`, mais performático, em todas as consultas;
+3. integrar os parâmetros `page` e `titulo`: podemos realizar consultas paginadas e consultas a partir de um termo no título dos vídeos, mas não conseguimos realizar as duas ao mesmo tempo (paginação de uma consulta por vídeos a partir do título, ver item anterior);
+4. implementar mecanismo para ligar ou desligar a autenticação/autorização para utilizar a API (útil para brincar com a integração com o _front-end_ do [Aluraflix](https://github.com/alura-cursos/aluraflix-front));
+5. refatorar completamente a estrutura do projeto segundo os melhores padrões.
 
 <br/>
 <p style="text-align: center;">
