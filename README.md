@@ -95,6 +95,15 @@ Os testes da API Rest podem ser feitos pelo utilitário de linha de comando `cur
 
 A autenticação _de-facto_ do usuário não existe, somente obrigamos o envio de parâmetros específicos pelo método de _login_ para gerar um _token_ válido para a API. Os _tokens_ também podem ser gerados (e validados) em https://jwt.io/, sendo necessário fornecer somente os parâmetros já mencionados e a sua chave secreta.
 
+# Logs
+
+Depois de disponibilizada, você pode acompanhar as chamadas à sua API remotamente via o seguinte comando:
+
+```bash
+sls logs --function <function-name> --tail --stage release
+```
+onde `<function-name>` é o nome do seu método. Também é possivel consultar os _logs_ via [AWS CloudWatch](https://console.aws.amazon.com/cloudwatch).
+
 # Melhorias
 
 Algumas funcionalidades ou atividades ficaram de fora:
