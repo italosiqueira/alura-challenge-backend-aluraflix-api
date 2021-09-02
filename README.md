@@ -91,7 +91,7 @@ Encontrei as seguintes diferenças ao realizar o _deploy_ entre os serviços loc
 
 Os testes da API Rest podem ser feitos pelo utilitário de linha de comando `curl` ou por um aplicativo de cliente de APIs. Optamos por esta última opção, utilizando o [Insomnia](https://insomnia.rest/). Os projeto do _Insomnia_ está configurado somente para testes de integração locais.
 
-# Segunração com JWT
+# Segurança com JWT
 
 A autenticação _de-facto_ do usuário não existe, somente obrigamos o envio de parâmetros específicos pelo método de _login_ para gerar um _token_ válido para a API. Os _tokens_ também podem ser gerados (e validados) em https://jwt.io/, sendo necessário fornecer somente os parâmetros já mencionados e a sua chave secreta.
 
