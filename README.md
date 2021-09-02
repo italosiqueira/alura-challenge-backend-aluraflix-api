@@ -91,6 +91,10 @@ Encontrei as seguintes diferenças ao realizar o _deploy_ entre os serviços loc
 
 Os testes da API Rest podem ser feitos pelo utilitário de linha de comando `curl` ou por um aplicativo de cliente de APIs. Optamos por esta última opção, utilizando o [Insomnia](https://insomnia.rest/). Os projeto do _Insomnia_ está configurado somente para testes de integração locais.
 
+# Segunração com JWT
+
+A autenticação _de-facto_ do usuário não existe, somente obrigamos o envio de parâmetros específicos pelo método de _login_ para gerar um _token_ válido para a API. Os _tokens_ também podem ser gerados (e validados) em https://jwt.io/, sendo necessário fornecer somente os parâmetros já mencionados e a sua chave secreta.
+
 # Melhorias
 
 Algumas funcionalidades ou atividades ficaram de fora:
@@ -99,7 +103,8 @@ Algumas funcionalidades ou atividades ficaram de fora:
 2. utilizar os métodos `query` do _DynamoDB_: é necessário definir adequadamente nossos _schemas_ no _framework_ de modelagem _Dynamoose_ para utilizar o método de consulta `query`, mais performático, em todas as consultas;
 3. integrar os parâmetros `page` e `titulo`: podemos realizar consultas paginadas e consultas a partir de um termo no título dos vídeos, mas não conseguimos realizar as duas ao mesmo tempo (paginação de uma consulta por vídeos a partir do título, ver item anterior);
 4. implementar mecanismo para ligar ou desligar a autenticação/autorização para utilizar a API (útil para brincar com a integração com o _front-end_ do [Aluraflix](https://github.com/alura-cursos/aluraflix-front));
-5. refatorar completamente a estrutura do projeto segundo os melhores padrões.
+5. integrar a solução de autenticação ao [AWS Cognito](https://aws.amazon.com/pt/cognito/) ou realizar a implementaçao de um CRUD para usuários;
+6. refatorar completamente a estrutura do projeto segundo os melhores padrões.
 
 <br/>
 <p style="text-align: center;">
