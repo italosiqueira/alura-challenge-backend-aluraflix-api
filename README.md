@@ -1,3 +1,18 @@
+<p style="text-align: center;">
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript">
+    <img src="https://img.shields.io/badge/Node.js-43853D?logo=node.js&logoColor=white" alt="NodeJS">
+    <img src="https://img.shields.io/badge/Serverless-red?logo=serverless&logoColor=white" alt="Serverless">
+    <img src="https://img.shields.io/badge/Amazon_AWS-232F3E?logo=amazon-aws&logoColor=white" alt="AWS">
+    <img src="https://img.shields.io/badge/DynamoDB-232F3E?logo=amazon-dynamodb&logoColor=white" alt="DynamoDB">
+    <img src="https://img.shields.io/badge/Markdown-000000?logo=markdown&logoColor=white" alt="Markdown">
+</p>
+
+<p style="text-align: center;">
+    <img src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white" alt="Windows 10 21H1">
+    <img src="https://img.shields.io/badge/NVIDIA-GTX1050_TI-76B900?logo=nvidia&logoColor=white" alt="Nvidia GTX1050 Ti">
+    <img src="https://img.shields.io/badge/Intel-Core_i7_7th-0071C5?logo=intel&logoColor=white" alt="Intel i7">
+</p>
+
 # AluraFlix Backend API Rest
 
 Este é o projeto da API Rest do Challange Back End da Alura. #alurachallengeback
@@ -114,19 +129,3 @@ Algumas funcionalidades ou atividades ficaram de fora:
 4. implementar mecanismo para ligar ou desligar a autenticação/autorização para utilizar a API (útil para brincar com a integração com o _front-end_ do [Aluraflix](https://github.com/alura-cursos/aluraflix-front));
 5. integrar a solução de autenticação ao [AWS Cognito](https://aws.amazon.com/pt/cognito/) ou realizar a implementaçao de um CRUD para usuários;
 6. refatorar completamente a estrutura do projeto segundo os melhores padrões.
-
-<br/>
-<p style="text-align: center;">
-    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript">
-    <img src="https://img.shields.io/badge/Node.js-43853D?logo=node.js&logoColor=white" alt="NodeJS">
-    <img src="https://img.shields.io/badge/Serverless-red?logo=serverless&logoColor=white" alt="Serverless">
-    <img src="https://img.shields.io/badge/Amazon_AWS-232F3E?logo=amazon-aws&logoColor=white" alt="AWS">
-    <img src="https://img.shields.io/badge/DynamoDB-232F3E?logo=amazon-dynamodb&logoColor=white" alt="DynamoDB">
-    <img src="https://img.shields.io/badge/Markdown-000000?logo=markdown&logoColor=white" alt="Markdown">
-</p>
-
-<p style="text-align: center;">
-    <img src="https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white" alt="Windows 10 21H1">
-    <img src="https://img.shields.io/badge/NVIDIA-GTX1050_TI-76B900?logo=nvidia&logoColor=white" alt="Nvidia GTX1050 Ti">
-    <img src="https://img.shields.io/badge/Intel-Core_i7_7th-0071C5?logo=intel&logoColor=white" alt="Intel i7">
-</p>
